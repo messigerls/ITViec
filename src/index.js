@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const path = require("path");
 const session = require("express-session");
 const route = require("./routers/");
-const { authLogin } = require('./middleware/authentication')
 
 const PORT = process.env.PORT || 3000;
 

@@ -3,11 +3,359 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Home | UR Job</title>
+        <link rel="icon" href="/img/logo.png" />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="/fonts/icon/css/all.css" />
+        <link rel="stylesheet" href="/css/base.css" />
+        <link rel="stylesheet" href="/css/home.css" />
     </head>
-
     <body>
-        <h1>Home</h1>
-    </body>
+        <div class="app">
+            <header>
+                <div class="header width_box">
+                    <div class="header__top">
+                        <div class="logo">
+                            <a href="/">
+                                <img
+                                    src="/img/logo.png"
+                                    alt=""
+                                    class="logo__img"
+                                />
+                            </a>
+                        </div>
+                        <nav class="navbar navbar-expand-lg">
+                            <button
+                                class="navbar-toggler"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span class="navbar-toggler-icon"
+                                    ><i class="fas fa-bars"></i
+                                ></span>
+                            </button>
 
+                            <div
+                                class="collapse navbar-collapse"
+                                id="navbarSupportedContent"
+                            >
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link menu__item" href="#"
+                                            >Home
+                                            <span class="sr-only"
+                                                >(current)</span
+                                            ></a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menu__item" href="#"
+                                            >Việc Làm IT</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menu__item" href="#"
+                                            >Top Công Ty</a
+                                        >
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link menu__item" href="#"
+                                            >Đăng Nhập</a
+                                        >
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a
+                                            class="nav-link dropdown-toggle menu__item"
+                                            href="#"
+                                            id="navbarDropdown"
+                                            role="button"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false"
+                                        >
+                                            Tài Khoản
+                                        </a>
+                                        <div
+                                            class="dropdown-menu"
+                                            aria-labelledby="navbarDropdown"
+                                        >
+                                            <a class="dropdown-item" href="#"
+                                                >Action</a
+                                            >
+                                            <a class="dropdown-item" href="#"
+                                                >Another action</a
+                                            >
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#"
+                                                >Something else here</a
+                                            >
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="main__top">
+                    <div class="main__bg">
+                        <div class="width_box">
+                            <div class="main__content">
+                                <h1><span>5000</span> Việc Làm IT cho bạn</h1>
+                            </div>
+                            <div class="main__search">
+                                <form
+                                    action="/search"
+                                    method="get"
+                                    class="main__form"
+                                    autocomplete="off"
+                                    aria-autocomplete="none"
+                                >
+                                    <div class="form__group">
+                                        <i
+                                            class="fas fa-search icon__search"
+                                        ></i>
+                                        <input
+                                            type="text"
+                                            name="search"
+                                            id="search"
+                                            placeholder="Tìm kiếm theo kỹ năng, chức vụ, công ty"
+                                            class="form__input"
+                                        />
+                                    </div>
+                                    <select
+                                        id="city"
+                                        class="form-control city"
+                                        name="city"
+                                    >
+                                        <option
+                                            value="all"
+                                            selected
+                                            class="city__option"
+                                        >
+                                            Thành phố
+                                        </option>
+                                        <option
+                                            value="ha-noi"
+                                            class="city__option"
+                                        >
+                                            Hà Nội
+                                        </option>
+                                        <option
+                                            value="da-nang"
+                                            class="city__option"
+                                        >
+                                            Đà Nẵng
+                                        </option>
+                                        <option
+                                            value="tp-hcm"
+                                            class="city__option"
+                                        >
+                                            TP.HCM
+                                        </option>
+                                    </select>
+                                    <button
+                                        type="submit"
+                                        class="main__search__btn"
+                                    >
+                                        Tìm kiếm
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main width_box">
+                    <div class="main__company__content-box">
+                        <a href="#" class="main__company__content"
+                            >Top Công Ty</a
+                        >
+                    </div>
+                    <div class="main__company">
+                        <a href="#" class="main__company__group">
+                            <img
+                                src="/img/logo.png"
+                                alt=""
+                                class="main__company__img"
+                            />
+                        </a>
+                        <a href="#" class="main__company__group">
+                            <img
+                                src="/img/logo.png"
+                                alt=""
+                                class="main__company__img"
+                            />
+                        </a>
+                        <a href="#" class="main__company__group">
+                            <img
+                                src="/img/logo.png"
+                                alt=""
+                                class="main__company__img"
+                            />
+                        </a>
+                        <a href="#" class="main__company__group">
+                            <img
+                                src="/img/logo.png"
+                                alt=""
+                                class="main__company__img"
+                            />
+                        </a>
+                        <a href="#" class="main__company__group">
+                            <img
+                                src="/img/logo.png"
+                                alt=""
+                                class="main__company__img"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <div class="footer__top">
+                    <div class="footer__top__main width_box">
+                        <div class="footer__top__group">
+                            <h5 class="footer__top__group__content">
+                                Việc làm IT theo Kỹ năng
+                            </h5>
+                            <a href="#" class="footer__top__group__link"
+                                >Java</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >JavaScript</a
+                            >
+                            <a href="#" class="footer__top__group__link">PHP</a>
+                            <a href="#" class="footer__top__group__link">C#</a>
+                            <a href="#" class="footer__top__group__link"
+                                >Android</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Xem tất cả</a
+                            >
+                        </div>
+                        <div class="footer__top__group">
+                            <h5 class="footer__top__group__content">
+                                Việc làm IT theo Cấp bậc
+                            </h5>
+                            <a href="#" class="footer__top__group__link"
+                                >Tester</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Senior</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Junior</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Fresher</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Internship</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Xem tất cả</a
+                            >
+                        </div>
+                        <div class="footer__top__group">
+                            <h5 class="footer__top__group__content">
+                                Việc làm IT theo Công ty
+                            </h5>
+                            <a href="#" class="footer__top__group__link"
+                                >Company</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Company</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Company</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Company</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Company</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Xem tất cả</a
+                            >
+                        </div>
+                        <div class="footer__top__group">
+                            <h5 class="footer__top__group__content">
+                                Việc làm IT theo Thành phố
+                            </h5>
+                            <a href="#" class="footer__top__group__link"
+                                >Hà Nội</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Hồ Chí Minh</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Đà Nẵng</a
+                            >
+                            <a href="#" class="footer__top__group__link"
+                                >Xem tất cả</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__bot">
+                    <div class="footer__bot__main width_box">
+                        <div class="footer__bot__group">
+                            <a href="#" class="footer__bot__item">Trang chủ</a>
+                            <a href="#" class="footer__bot__item"
+                                >Việc làm IT</a
+                            >
+                            <a href="#" class="footer__bot__item"
+                                >Top Company</a
+                            >
+                            <a href="#" class="footer__bot__item">Liên hệ</a>
+                        </div>
+                        <div class="footer__bot__group">
+                            <a href="#" class="footer__bot__item"
+                                >Quy định bảo mật</a
+                            >
+                            <a href="#" class="footer__bot__item"
+                                >Thỏa thuận sử dụng</a
+                            >
+                            <a href="#" class="footer__bot__item"
+                                >Chính sách giải quyết khiếu nại</a
+                            >
+                            <a href="#" class="footer__bot__item"
+                                >Quy chế hoạt động</a
+                            >
+                            <a href="#" class="footer__bot__item"
+                                >Câu hỏi thường gặp</a
+                            >
+                        </div>
+                        <div class="footer__bot__group">
+                            <p href="#" class="footer__bot__item">
+                                Copy © URJob
+                            </p>
+                            <p href="#" class="footer__bot__item">
+                                Điện thoại: 0123456789
+                            </p>
+                            <p href="#" class="footer__bot__item">
+                                Email: ntJob@gmail.com
+                            </p>
+                            <p href="#" class="footer__bot__item">
+                                Địa chỉ: G2, 144-Xuân Thủy, Cầu Giấy, Hà Nội
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Bootstrap -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
 </html>

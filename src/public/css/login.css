@@ -1,18 +1,13 @@
-.header{
-    height: 100px;
+.app{
+
+}
+main{
+    height: 700px;
+}
+.main{
     display: flex;
-    justify-content: space-between;
-    
-    border: 1px solid black;
-}
-.width__box{
-    width: 95%;
-    max-width: 1000px;
-    margin: auto;
-}
-.logo{
-    height: 100%;
 }
 .main__form{
+    margin: auto;
     
 }
