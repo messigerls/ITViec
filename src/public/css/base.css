@@ -40,7 +40,18 @@ header{
     color: white;
     border-bottom: 2px solid white;
 }
-
+.account{
+    background-color: #2E2A2B;
+}
+.account a{
+    color: #BBBDBB;
+    padding: 8px 20px;
+    font-size: 1.1rem;
+}
+.account a:hover{
+    background-color: #221F20;
+    color: white;
+}
 
 /* footer */
 

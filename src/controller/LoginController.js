@@ -3,12 +3,15 @@ const bcrypt = require("bcrypt");
 
 class LoginController {
     getLogin(req, res) {
-        res.render("guest/login");
+        res.render("guest/login", {
+            user: req.session.user
+        });
     }
 
     postLogin = (req, res) => {
         const body = req.body;
         Account.getUserByUserName(body.username, async (err, result) => {
+            
             if (err) return res.status(500).send({ err });
 
             if (!result.length)
@@ -24,8 +27,10 @@ class LoginController {
                     .status(400)
                     .send({ message: "Ban da nhap sai ten hoac mat khau" });
             req.session.user = { role: result[0].role, userId: result[0].id };
+            res.cookie('user', JSON.stringify({ role: result[0].role, name: 'Nguyen Duy Nam' }));
             res.redirect(301, "/");
-        });
+        })
+        
     };
 }
 

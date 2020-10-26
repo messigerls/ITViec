@@ -4,6 +4,10 @@ class DefaultController{
             user: req.session.user
         });
     }
+    logout = (req, res) => {
+        req.session.destroy();
+        res.redirect('/login');
+    }
 }
 
 module.exports = new DefaultController;

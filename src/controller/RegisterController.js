@@ -2,7 +2,9 @@ const Account = require("../models/account");
 const bcrypt = require('bcrypt');
 class RegisterController {
     getRegister(req, res) {
-        res.render('guest/register')
+        res.render('guest/register', {
+            user : req.session.user
+        })
     }
 
     postRegister = async(req, res) => {

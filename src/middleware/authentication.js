@@ -14,10 +14,16 @@ function authRole(req, res, next) {
 
 function authLogin(req, res, next){
     if(req.session && req.session.user){
-        res.redirect('/');
-        
+        res.redirect('/');  
     }
     next();
 }
 
-module.exports = { authUser, authRole, authLogin };
+function authLogout(req, res, next){
+    if(req.session && req.session.user){
+        next()
+    }
+    return res.status(404).send({ message : 'Not Found' })
+}
+
+module.exports = { authUser, authRole, authLogin, authLogout };
