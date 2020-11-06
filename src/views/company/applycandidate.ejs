@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <link rel="icon" href="/img/logo.png"/>
+        <title>Candidate</title>
+        <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
-        <link rel="stylesheet" href="/css/company.css" />
+        <link rel="stylesheet" href="/css/applycandidate.css" />
     </head>
     <body>
         <div class="app">
@@ -37,19 +37,11 @@
                                         <a class="nav-link menu__item" href="/">Home
                                             <span class="sr-only">(current)</span></a>
                                     </li>
-                                    <% if(user){ %>     
-                                        <% if(user.role === 2) {%>
-                                            <li class="nav-item">
-                                                <a class="nav-link menu__item" href="/candidate">Tìm kiếm ứng viên</a>
-                                            </li>
-                                        <% } %> 
-                                    <% } %> 
+                                    
                                     <li class="nav-item">
                                         <a class="nav-link menu__item" href="/job-list">Việc làm IT</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu__item" href="/top-company">Top Công Ty</a>
-                                    </li>
+                                    
                                     <% if(!user){ %>
                                         <li class="nav-item">
                                             <a class="nav-link menu__item" href="/login">Đăng Nhập</a>
@@ -83,75 +75,72 @@
             <main>
                 <div class="width_box">
                     <div class="main">
-                        <div class="main__top">
-                            <div class="coverImg">
-                                <img src="<%= companyData.cover_image %> " alt="">
-                            </div>
-                            <div class="company__info">
-                                <div class="company__avatar">
-                                    <img src="<%= companyData.company_avatar %> " alt="">
-                                </div>
-                                <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__main">
-                            <div class="main__tab">
-                                <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
-                                <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
-                            <div class="main__tab__content" id='des'>
-                                <div class="job__description company__item">
-                                    <h2 class="title">
-                                        Giới thiệu
-                                    </h2>
-                                    <ul>
-                                        <% companyData.description.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
-                                <div class="company__tech company__item">
-                                    <h2 class="title">
-                                        Chuyên môn của chúng tôi
-                                    </h2>
-                                    <% techCompanyData.forEach(tech => { %> 
-                                        <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
+                        <div class="main__group">
+                            <h1>Danh sách ứng viên đang chờ</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">CV</th>
+                                        <th scope="col">Thời gian</th>
+                                        <th scope="col">Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <% pendingApplyData.forEach((apply, index) => { %> 
+                                        <tr>
+                                            <th scope="row"><%= index + 1 %></th>
+                                            <td><%= apply.name %> </td>
+                                            <td><%= apply.email %> </td>
+                                            <% if(apply.cv == null) {%> 
+                                                <td>Chưa có CV</td>
+                                            <% } else{ %> 
+                                                <td><a href="#">Xem CV</a></td>
+                                            <% } %> 
+                                            
+                                            <td><%= apply.distanceApplyTime %> </td>
+                                            <td>
+                                                <a href="/apply-candidate/delete/<%= apply.apply_id %>"><button class="btn btn-danger">Xóa</button></a>
+                                                <a href="/apply-candidate/modify/<%= apply.apply_id %>"><button class="btn btn-primary">Nhận</button></a>
+                                            </td>
+                                        </tr>
                                     <% }) %> 
-                                </div>
-                                <div class="company__treatment company__item">
-                                    <h2 class="title">
-                                        Đãi Ngộ
-                                    </h2>
-                                    <ul>
-                                        <% companyData.treatment.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="main__tab__content" id='review'>
-                                
-                               
-                            </div>
+                                   
+                                </tbody>
+                            </table>
                         </div>
-
+                        <div class="main__group">
+                            <h1>Danh sách ứng viên đã thông qua</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">CV</th>
+                                        <th scope="col">Thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% receivedApplyData.forEach((apply, index) => { %> 
+                                        <tr>
+                                            <th scope="row"><%= index + 1 %></th>
+                                            <td><%= apply.name %> </td>
+                                            <td><%= apply.email %> </td>
+                                            <% if(apply.cv == null) {%> 
+                                                <td>Chưa có CV</td>
+                                            <% } else{ %> 
+                                                <td><a href="<%= apply.cv %> ">Xem CV</a></td>
+                                            <% } %> 
+                                            <td><%= apply.distanceReceivedTime %> </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -294,6 +283,5 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/company.js"></script>
     </body>
 </html>

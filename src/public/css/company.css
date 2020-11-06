@@ -1,0 +1,46 @@
+
+main{
+    background-color: #E9E9E9;
+}
+.main{
+
+}
+.main__top{
+
+}
+.coverImg{
+
+}
+.coverImg > img {
+    width: 100%;
+}
+.company__info{
+    background-color: white;
+    height: 200px;
+    display: flex;
+    padding: 20px;
+}
+.company__avatar img {
+    height: 100px;
+}
+.company__name{
+    line-height: 1;
+}
+
+.main__main{
+    margin-top: 10px;
+}
+.main__tab{
+
+}
+.main__tab__btn{
+
+}
+.main__tab__content{
+  min-height: 500px;
+    height: 95%;
+    background-color: white;
+}
+
+
+

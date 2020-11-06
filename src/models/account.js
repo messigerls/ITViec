@@ -13,6 +13,14 @@ class Account {
         const query = `SELECT * FROM account WHERE username = '${username}'`;
         return connection.query(query, func);
     }
+    getUserById(id, func){
+        const query = `SELECT * FROM account WHERE id = ${id}`;
+        return connection.query(query, func);
+    }
+    getEmailAndPhoneById(id, func){
+        const query = `SELECT email,sdt FROM account WHERE id = ${id}`;
+        return connection.query(query, func);
+    }
     insertAccount(account, func) {
         const query =
             "INSERT INTO account (username, password, role, email, sdt) VALUES(?, ?, ?, ?, ?)";
@@ -22,6 +30,7 @@ class Account {
             func
         );
     }
+    
 }
 
 module.exports = new Account();

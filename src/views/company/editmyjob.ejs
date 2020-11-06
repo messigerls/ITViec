@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <link rel="icon" href="/img/logo.png"/>
+        <title>Edit My Job</title>
+        <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,7 +12,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
-        <link rel="stylesheet" href="/css/company.css" />
     </head>
     <body>
         <div class="app">
@@ -83,75 +82,55 @@
             <main>
                 <div class="width_box">
                     <div class="main">
-                        <div class="main__top">
-                            <div class="coverImg">
-                                <img src="<%= companyData.cover_image %> " alt="">
+                        <h1>Edit Job</h1>
+                        <form action="/my-job/<%= jobData.job_id %>/edit" method="post">
+                            <div class="form-group">
+                                <label for="jobTitle">Title</label>
+                                <input type="text" class="form-control" value="<%= jobData.job_title %>" id="jobTitle" name="jobTitle">
                             </div>
-                            <div class="company__info">
-                                <div class="company__avatar">
-                                    <img src="<%= companyData.company_avatar %> " alt="">
-                                </div>
-                                <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__main">
-                            <div class="main__tab">
-                                <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
-                                <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
-                            <div class="main__tab__content" id='des'>
-                                <div class="job__description company__item">
-                                    <h2 class="title">
-                                        Giới thiệu
-                                    </h2>
-                                    <ul>
-                                        <% companyData.description.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
-                                <div class="company__tech company__item">
-                                    <h2 class="title">
-                                        Chuyên môn của chúng tôi
-                                    </h2>
-                                    <% techCompanyData.forEach(tech => { %> 
-                                        <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
+                            <div class="form-group">
+                                <label for="jobPosition">Position</label>
+                                <select name="jobPosition" id="jobPosition" value=<%= jobData.position_id %> >
+                                    <% jobPositionData.forEach((e) => { %>
+                                        <option value=<%= e.position_id %> <%= e.position_id === jobData.position_id ? 'selected' : '' %>> <%= e.position_name %> </option>
                                     <% }) %> 
-                                </div>
-                                <div class="company__treatment company__item">
-                                    <h2 class="title">
-                                        Đãi Ngộ
-                                    </h2>
-                                    <ul>
-                                        <% companyData.treatment.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
+                                </select>
                             </div>
-                            <div class="main__tab__content" id='review'>
+                            <div class="form-group">
+                                <label for="numberOfJob">Number Of Job</label>
+                                <input type="number" class="form-control" value=<%= jobData.number_of_job %> id="numberOfJob" name="numberOfJob" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="minSalary">Minimum Salary</label>
+                                <input type="number" class="form-control" value=<%= jobData.min_salary %> id="minSalary" name="minSalary" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxSalary">Maximum Salary</label>
+                                <input type="number" class="form-control" value=<%= jobData.max_salary %> id="maxSalary" name="maxSalary">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobDescription">Description</label>
+                                <textarea name="jobDescription" id="jobDescription"  class="form-control"rows="10"><%= jobData.job_description %> </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="require">Require</label>
+                                <textarea name="require" id="require"  class="form-control" rows="10"><%= jobData.job_require %> </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="timeServing">Time Serving</label>
+                                <input type="text" class="form-control" value="<%= jobData.timeserving %>" id="timeServing" name="timeServing">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-check"></i> Save
+                                </button>
                                 
-                               
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="far fa-trash-alt"></i> Delete
+                                </button>
+                                  
                             </div>
-                        </div>
-
+                        </form>
                     </div>
                 </div>
             </main>
@@ -288,12 +267,33 @@
                     </div>
                 </div>
             </footer>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Cảnh báo</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h6>Bạn có chắc muốn xóa việc làm này?</h6>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <a href="/my-job/<%= jobData.job_id %>/delete">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
 
         <!-- Bootstrap -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/company.js"></script>
+        <script src="/js/editMyJob.js"></script>
     </body>
 </html>

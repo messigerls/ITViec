@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <link rel="icon" href="/img/logo.png"/>
+        <title>My Job | UR Job</title>
+        <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
-        <link rel="stylesheet" href="/css/company.css" />
+        <link rel="stylesheet" href="/css/myjob.css" />
     </head>
     <body>
         <div class="app">
@@ -83,75 +83,91 @@
             <main>
                 <div class="width_box">
                     <div class="main">
-                        <div class="main__top">
-                            <div class="coverImg">
-                                <img src="<%= companyData.cover_image %> " alt="">
-                            </div>
-                            <div class="company__info">
-                                <div class="company__avatar">
-                                    <img src="<%= companyData.company_avatar %> " alt="">
-                                </div>
-                                <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                </div>
-                            </div>
+                        <h1>My Job</h1>
+                        <div>
+                            <button class="btn btn-primary" onclick="openAdd()">Thêm</button>
                         </div>
-                        <div class="main__main">
-                            <div class="main__tab">
-                                <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
-                                <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
-                            <div class="main__tab__content" id='des'>
-                                <div class="job__description company__item">
-                                    <h2 class="title">
-                                        Giới thiệu
-                                    </h2>
-                                    <ul>
-                                        <% companyData.description.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
+                        <div class="formBox" style="display: none;">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label for="addPosition">Chức vụ</label>
+                                    <select name="addPosition" id="addPosition">
+                                        <% jobPositionData.forEach((e) => { %>
+                                            <option value=<%= e.position_id %> ><%= e.position_name %> </option>
+                                        <% }) %> 
+                                    </select>
                                 </div>
-                                <div class="company__tech company__item">
-                                    <h2 class="title">
-                                        Chuyên môn của chúng tôi
-                                    </h2>
-                                    <% techCompanyData.forEach(tech => { %> 
-                                        <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
-                                    <% }) %> 
+                                <div class="form-group">
+                                    <label for="addTitle">Tên việc làm</label>
+                                    <input type="text" class="form-control" id="addTitle" name="addTitle">
                                 </div>
-                                <div class="company__treatment company__item">
-                                    <h2 class="title">
-                                        Đãi Ngộ
-                                    </h2>
-                                    <ul>
-                                        <% companyData.treatment.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
+                                <div class="form-group">
+                                    <label for="addNumberJob">Số lượng</label>
+                                    <input type="number" class="form-control" id="addNumberJob" name="addNumberJob" min="1" value="1">
                                 </div>
-                            </div>
-                            <div class="main__tab__content" id='review'>
-                                
-                               
-                            </div>
+                                <div class="form-group">
+                                    <label for="addMinSalary">Mức lương tối thiểu</label>
+                                    <input type="number" class="form-control" id="addMinSalary" name="addMinSalary">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addMaxSalary">Mức lương tối đa</label>
+                                    <input type="number" class="form-control" id="addMaxSalary" name="addMaxSalary">
+                                </div>
+                                <div class="form-group">
+                                    <label for="addDescription">Mô tả công việc</label>
+                                    <textarea type="text" class="form-control" id="addDescription" name="addDescription"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addRequire">Yêu cầu</label>
+                                    <textarea type="text" class="form-control" id="addRequire" name="addRequire"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addOverTime">Tăng ca</label>
+                                    <select name="addOverTime" id="addOverTime" name="addOverTime">
+                                        <option value="1" selected>Có</option>
+                                        <option value="0">Không</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addTimeServing">Thời gian làm việc</label>
+                                    <input type="text" class="form-control" id="addTimeServing" name="addTimeServing">
+                                </div>
+                                <button>Đồng Ý</button>
+                            </form>
                         </div>
-
+                        <div class="main__job">
+                            <% jobData.forEach(job => { %> 
+                                <div class="main__job__item">
+                                    <div class="job__item__left">
+                                        <a href="#">
+                                            <img src=<%= imgJobData[0].company_avatar %>  alt="avatar company" class="main__item__left__img">
+                                        </a>
+                                    </div>
+                                    <div class="job__item__center">
+                                        <a href="/my-job/<%= job.job_id %>/edit">
+                                            <h2 class="job__item__title"><%= job.number_of_job %> <%= job.job_title %></h2>
+                                        </a>
+                                        <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> <%= (job.min_salary || '?') + ' - ' + (job.max_salary || '?')%> </p>
+                                        
+                                        <p class="job__description"><%= job.job_description %></p>
+                                        <div class="job__tech__list">
+                                            <% techJobData.filter(techJob => techJob.job_id === job.job_id)[0].technology_arr.forEach(tech => { %> 
+                                                <a href="#" class="job__tech__item"><%= tech.technology_name %></a>
+                                            <% }) %> 
+                                        </div>
+                                    </div>
+                                    <div class="job__item__right">
+                                        <div class="job__item__right__top">
+                                            <span><%= provinceJobData[0].province_name %></span>
+                                        </div>
+                                        <div class="job__item__right__bot">
+                                            <span><%= job.distanceTime %> </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %> 
+                            
+                        </div>
                     </div>
                 </div>
             </main>
@@ -294,6 +310,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/company.js"></script>
+        <script src="/js/myJob.js"></script>
     </body>
 </html>

@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
-        <link rel="icon" href="/img/logo.png"/>
+        <title>Apply Job</title>
+        <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
-        <link rel="stylesheet" href="/css/company.css" />
+        <link rel="stylesheet" href="/css/applyjob.css" />
     </head>
     <body>
         <div class="app">
@@ -82,76 +82,79 @@
             </header>
             <main>
                 <div class="width_box">
+                    <div class="main__search">
+                        <form action="/job-list" method="get" class="main__form" autocomplete="off"
+                            aria-autocomplete="none"> 
+                            <div class="form__group">
+                                <i class="fas fa-search icon__search"></i>
+                                <input type="text" name="search" id="search"
+                                    placeholder="Tìm kiếm theo kỹ năng, chức vụ, công ty" class="form__input" />
+                            </div>
+                            <select id="city" class="form-control city" name="city">
+                                <option value="all" selected class="city__option">
+                                    Thành phố
+                                </option>
+                                <option value="ha-noi" class="city__option">
+                                    Hà Nội
+                                </option>
+                                <option value="da-nang" class="city__option">
+                                    Đà Nẵng
+                                </option>
+                                <option value="tp-hcm" class="city__option">
+                                    TP.HCM
+                                </option>
+                            </select>
+                            <button type="submit" class="main__search__btn">
+                                Tìm kiếm
+                            </button>
+                        </form>
+                    </div>
                     <div class="main">
-                        <div class="main__top">
-                            <div class="coverImg">
-                                <img src="<%= companyData.cover_image %> " alt="">
-                            </div>
-                            <div class="company__info">
-                                <div class="company__avatar">
-                                    <img src="<%= companyData.company_avatar %> " alt="">
-                                </div>
-                                <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__main">
-                            <div class="main__tab">
-                                <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
-                                <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
-                            <div class="main__tab__content" id='des'>
-                                <div class="job__description company__item">
-                                    <h2 class="title">
-                                        Giới thiệu
-                                    </h2>
-                                    <ul>
-                                        <% companyData.description.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
-                                <div class="company__tech company__item">
-                                    <h2 class="title">
-                                        Chuyên môn của chúng tôi
-                                    </h2>
-                                    <% techCompanyData.forEach(tech => { %> 
-                                        <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
+                        <div class="main__group">
+                            <h1>Việc làm đang chờ</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Việc làm</th>
+                                        <th scope="col">Thời gian</th>
+                                        <th scope="col">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <% pendingJobData.forEach((job, index) => { %> 
+                                        <tr>
+                                            <th scope="row"><%= index + 1 %> </th>
+                                            <td><a href="/job/<%= job.job_id %> "><%= job.job_title %></a></td>
+                                            <td><%= Date(job.applyTime).toString() %> </td>
+                                            <td><a href="/apply-job/delete/<%= job.apply_id %> "><button class="btn btn-danger">Xóa</button></a></td>
+                                        </tr>
                                     <% }) %> 
-                                </div>
-                                <div class="company__treatment company__item">
-                                    <h2 class="title">
-                                        Đãi Ngộ
-                                    </h2>
-                                    <ul>
-                                        <% companyData.treatment.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="main__tab__content" id='review'>
-                                
-                               
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
-
+                        <div class="main__group">
+                            <h1>Việc làm được thông qua</h1>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Việc làm</th>
+                                        <th scope="col">Thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% approvedJobData.forEach((job, index) => { %> 
+                                        <tr>
+                                            <th scope="row"><%= index + 1 %> </th>
+                                            <td><a href="/job/<%= job.job_id %> "><%= job.job_title %></a></td>
+                                            <td><%= Date(job.applyTime).toString() %> </td>
+                                        </tr>
+                                    <% }) %> 
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -294,6 +297,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/company.js"></script>
+        <script src="/js/applyjob.js"></script>
     </body>
 </html>

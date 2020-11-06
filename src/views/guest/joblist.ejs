@@ -83,7 +83,7 @@
                 <div class="main__bg">
                     <div class="width_box">
                         <div class="main__search">
-                            <form action="/job" method="get" class="main__form" autocomplete="off"
+                            <form action="/job-list" method="get" class="main__form" autocomplete="off"
                                 aria-autocomplete="none">
                                 <div class="form__group">
                                     <i class="fas fa-search icon__search"></i>
@@ -115,9 +115,8 @@
             <div class="main">
                 <div class="main__center width_box">
                     <div class="main__title">
-                        <h2>Tìm thấy 1000 việc làm cho bạn</h2>
-                        <h2>Việc làm bạn đang tìm kiếm không tồn tại.</h2>
-                        <h2>Bên dưới là một số việc làm mới đăng tuyển trên ITviec.</h2>
+                        <h2>Tìm thấy <span id='countJob'></span> việc làm cho bạn</h2>
+                        
                     </div>
                     <div class="main__sort">
                         <form action="">
@@ -140,181 +139,7 @@
                         </form>
                     </div>
                     <div class="main__job">
-                        <div class="main__job__item">
-                            <div class="job__item__left">
-                                <a href="#">
-                                    <img src="/img/logo.png" alt="avatar company" class="main__item__left__img">
-                                </a>
-                            </div>
-                            <div class="job__item__center">
-                                <a href="#">
-                                    <h2 class="job__item__title">03 Java Developer(HTML5,Javascrip)~1000$</h2>
-                                </a>
-                                <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> Up to 1200$</p>
-                                <!-- <ul class="job__reason__list">
-                                    <li class="job__reason__item">Premium Healthcare</li>
-                                    <li class="job__reason__item">Japanese & Other Allowances</li>
-                                    <li class="job__reason__item">Bonus twice a year</li>
-                                </ul> -->
-                                <p class="job__description">If you want to be part of a growing company, who is
-                                    constantly looking for new and
-                                    better ways to do things, exciting and challenging projects awaits...</p>
-                                <div class="job__tech__list">
-                                    <a href="#" class="job__tech__item">Java</a>
-                                    <a href="#" class="job__tech__item">JavaScript</a>
-                                    <a href="#" class="job__tech__item">HTML5</a>
-                                </div>
-                            </div>
-                            <div class="job__item__right">
-                                <div class="job__item__right__top">
-                                    <span>Hà Nội</span>
-                                    <span>Cầu Giấy</span>
-                                </div>
-                                <div class="job__item__right__bot">
-                                    <span>3 ngày trước</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__job__item">
-                            <div class="job__item__left">
-                                <a href="#">
-                                    <img src="/img/logo.png" alt="avatar company" class="main__item__left__img">
-                                </a>
-                            </div>
-                            <div class="job__item__center">
-                                <a href="#">
-                                    <h2 class="job__item__title">03 Java Developer(HTML5,Javascrip)~1000$</h2>
-                                </a>
-                                <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> Up to 1200$</p>
-                                <!-- <ul class="job__reason__list">
-                                    <li class="job__reason__item">Premium Healthcare</li>
-                                    <li class="job__reason__item">Japanese & Other Allowances</li>
-                                    <li class="job__reason__item">Bonus twice a year</li>
-                                </ul> -->
-                                <p class="job__description">If you want to be part of a growing company, who is
-                                    constantly looking for new and
-                                    better ways to do things, exciting and challenging projects awaits...</p>
-                                <div class="job__tech__list">
-                                    <a href="#" class="job__tech__item">Java</a>
-                                    <a href="#" class="job__tech__item">JavaScript</a>
-                                    <a href="#" class="job__tech__item">HTML5</a>
-                                </div>
-                            </div>
-                            <div class="job__item__right">
-                                <div class="job__item__right__top">
-                                    <span>Hà Nội</span>
-                                    <span>Cầu Giấy</span>
-                                </div>
-                                <div class="job__item__right__bot">
-                                    <span>3 ngày trước</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__job__item">
-                            <div class="job__item__left">
-                                <a href="#">
-                                    <img src="/img/logo.png" alt="avatar company" class="main__item__left__img">
-                                </a>
-                            </div>
-                            <div class="job__item__center">
-                                <a href="#">
-                                    <h2 class="job__item__title">03 Java Developer(HTML5,Javascrip)~1000$</h2>
-                                </a>
-                                <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> Up to 1200$</p>
-                                <!-- <ul class="job__reason__list">
-                                    <li class="job__reason__item">Premium Healthcare</li>
-                                    <li class="job__reason__item">Japanese & Other Allowances</li>
-                                    <li class="job__reason__item">Bonus twice a year</li>
-                                </ul> -->
-                                <p class="job__description">If you want to be part of a growing company, who is
-                                    constantly looking for new and
-                                    better ways to do things, exciting and challenging projects awaits...</p>
-                                <div class="job__tech__list">
-                                    <a href="#" class="job__tech__item">Java</a>
-                                    <a href="#" class="job__tech__item">JavaScript</a>
-                                    <a href="#" class="job__tech__item">HTML5</a>
-                                </div>
-                            </div>
-                            <div class="job__item__right">
-                                <div class="job__item__right__top">
-                                    <span>Hà Nội</span>
-                                    <span>Cầu Giấy</span>
-                                </div>
-                                <div class="job__item__right__bot">
-                                    <span>3 ngày trước</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__job__item">
-                            <div class="job__item__left">
-                                <a href="#">
-                                    <img src="/img/logo.png" alt="avatar company" class="main__item__left__img">
-                                </a>
-                            </div>
-                            <div class="job__item__center">
-                                <a href="#">
-                                    <h2 class="job__item__title">03 Java Developer(HTML5,Javascrip)~1000$</h2>
-                                </a>
-                                <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> Up to 1200$</p>
-                                <!-- <ul class="job__reason__list">
-                                    <li class="job__reason__item">Premium Healthcare</li>
-                                    <li class="job__reason__item">Japanese & Other Allowances</li>
-                                    <li class="job__reason__item">Bonus twice a year</li>
-                                </ul> -->
-                                <p class="job__description">If you want to be part of a growing company, who is
-                                    constantly looking for new and
-                                    better ways to do things, exciting and challenging projects awaits...</p>
-                                <div class="job__tech__list">
-                                    <a href="#" class="job__tech__item">Java</a>
-                                    <a href="#" class="job__tech__item">JavaScript</a>
-                                    <a href="#" class="job__tech__item">HTML5</a>
-                                </div>
-                            </div>
-                            <div class="job__item__right">
-                                <div class="job__item__right__top">
-                                    <span>Hà Nội</span>
-                                    <span>Cầu Giấy</span>
-                                </div>
-                                <div class="job__item__right__bot">
-                                    <span>3 ngày trước</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="main__job__item">
-                            <div class="job__item__left">
-                                <a href="#">
-                                    <img src="/img/logo.png" alt="avatar company" class="main__item__left__img">
-                                </a>
-                            </div>
-                            <div class="job__item__center">
-                                <a href="#">
-                                    <h2 class="job__item__title">03 Java Developer(HTML5,Javascrip)~1000$</h2>
-                                </a>
-                                <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> Up to 1200$</p>
-                                <!-- <ul class="job__reason__list">
-                                    <li class="job__reason__item">Premium Healthcare</li>
-                                    <li class="job__reason__item">Japanese & Other Allowances</li>
-                                    <li class="job__reason__item">Bonus twice a year</li>
-                                </ul> -->
-                                <p class="job__description">If you want to be part of a growing company, who is
-                                    constantly looking for new and
-                                    better ways to do things, exciting and challenging projects awaits...</p>
-                                <div class="job__tech__list">
-                                    <a href="#" class="job__tech__item">Java</a>
-                                    <a href="#" class="job__tech__item">JavaScript</a>
-                                    <a href="#" class="job__tech__item">HTML5</a>
-                                </div>
-                            </div>
-                            <div class="job__item__right">
-                                <div class="job__item__right__top">
-                                    <span>Hà Nội</span>
-                                    <span>Cầu Giấy</span>
-                                </div>
-                                <div class="job__item__right__bot">
-                                    <span>3 ngày trước</span>
-                                </div>
-                            </div>
-                        </div>
+                        
                         
                     </div>
 

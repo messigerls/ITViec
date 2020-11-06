@@ -85,52 +85,61 @@
                     <div class="main">
                         <% if(user.role === 1){ %> 
                             <div class="candidate">
-                                <form action="/profile/candidate" class="candidate__form" method="post">
+                                <form action="/profile/candidate" class="candidate__form" method="post" enctype="multipart/form-data">
                                     <div class="candidate__group form-group">
-                                        <img src="/img/logo.png" alt="">
-                                        <h2>Nguyễn Duy Nam</h2>
+                                        <img src=<%=candidate.img %>  alt="" onclick="editAvatar()">
+                                        <h2><%=candidate.name %> </h2>
                                     </div>
                                     <div class="custom-control custom-switch form-group">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1" <%= candidate.acceptSearch === 1 ? 'checked' : '' %>  >
                                         <label class="custom-control-label" for="customSwitch1">Cho phép tìm thấy</label>
                                     </div>
                                     <div class="form-group">
-                                        <p>Email : nguyenduynam12a10@gmail.com</p>
+                                        <p>Email : <%=candidate.email %></p>
                                     </div>
                                     <div class="form-group">
                                         <label for="cv">CV : </label>
-                                        <input type="file" name="cv" id="cv">
+                                        <a href="<%= candidate.cv %> ">CV của bạn</a>
                                     </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="inputGroupFileAddon01">CV</span>
+                                        </div>
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input cv" id="cv" name="cv"> 
+                                          <label class="custom-file-label" for="cv">Choose file</label>
+                                        </div>
+                                      </div>
                                     <div class="form-group">
                                         <label for="name">Name : </label>
-                                        <input type="text" value="Nguyen Duy Nam" name="name">
+                                        <input type="text" value="<%=candidate.name %>"  name="name">
                                     </div>
                                     <div class="form-group">
                                         <label for="gender">Gender : </label>
-                                        <select class="">
-                                            <option value="1" selected>Nam</option>
+                                        <select class="" value=<%=candidate.gender %> >
+                                            <option value="1" >Nam</option>
                                             <option value="-1">Nữ</option>
                                             <option value="0">Khác</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="dob">BirthDay : </label>
-                                        <input type="date" >
+                                        <input type="date" value=<%=candidate.dob.toISOString().substring(0, 10) %> >
                                     </div>
                                     <div class="form-group">
                                         <label for="applyPosition">Vị trí ứng tuyển : </label>
-                                        <select class="">
-                                            <option value="" selected>Fresher</option>
-                                            <option value="">Junior</option>
-                                            <option value="">Senior</option>
+                                        <select class="" value=<%= candidate.applyPosition %> >
+                                            <% jobPositionData.forEach((e) => { %>
+                                                <option value=<%= e.position_id %> ><%= e.position_name %> </option>
+                                            <% }) %> 
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="applyPosition">Nơi ứng tuyển : </label>
-                                        <select class="">
-                                            <option value="" selected>Hà Nội</option>
-                                            <option value="">TP.HCm</option>
-                                            <option value="">Đà Nẵng</option>
+                                        <select class="" value=<%= candidate.applyAddress %> >
+                                            <% provinceData.forEach((e) => { %>
+                                                <option value=<%= e.province_id %> ><%= e.province_name %> </option>
+                                            <% }) %> 
                                         </select>
                                     </div>
                                     <div class="form-group">

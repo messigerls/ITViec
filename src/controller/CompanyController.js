@@ -9,7 +9,7 @@ class CompanyController {
         });
     };
     getCompanyById = (req, res) => {
-        console.log(req.params.id);
+        
         const id = req.params.id;
         const review = new Promise((resolve, reject) => {
             Review.getReviewByCompanyId(id, (err, result) => {
@@ -30,19 +30,23 @@ class CompanyController {
             });
         });
         const company = new Promise((resolve, reject) => {
-            Company.getCompanyById(id, (err, result) => {
+            Company.getCompanyInfoById(id, (err, result) => {
                 if (err) {
                     reject(err);
                 } else resolve(result);
             });
         });
         Promise.all([review, techCompany, company])
+        
             .then((result) => {
-                res.json({
-                    reviewData: result[0],
+                console.log(result)
+                res.render('guest/company', {
+                    user: req.session.user,
+                    reviewData: result[0][0],
                     techCompanyData: result[1],
-                    companyData: result[2]
+                    companyData: result[2][0],
                 })
+                
             })
             .catch((err) => res.status(500).json({ error }));
     };

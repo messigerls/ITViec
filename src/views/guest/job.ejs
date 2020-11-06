@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title></title>
-        <link rel="icon" href="/img/logo.png"/>
+        <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -12,7 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
-        <link rel="stylesheet" href="/css/company.css" />
+        <link rel="stylesheet" href="/css/job.css">
     </head>
     <body>
         <div class="app">
@@ -83,75 +83,79 @@
             <main>
                 <div class="width_box">
                     <div class="main">
-                        <div class="main__top">
-                            <div class="coverImg">
-                                <img src="<%= companyData.cover_image %> " alt="">
-                            </div>
-                            <div class="company__info">
-                                <div class="company__avatar">
-                                    <img src="<%= companyData.company_avatar %> " alt="">
-                                </div>
-                                <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="coverImg">
+                            <img src="<%= jobData.cover_image %>"  alt="">
                         </div>
                         <div class="main__main">
-                            <div class="main__tab">
-                                <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
-                                <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
-                            <div class="main__tab__content" id='des'>
-                                <div class="job__description company__item">
-                                    <h2 class="title">
-                                        Giới thiệu
-                                    </h2>
-                                    <ul>
-                                        <% companyData.description.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
-                                            <li class="content"><%= e %> </li>
-                                        <% })  %> 
-                                    </ul>
+                            <div class="main__company">
+                                <a href="/company/<%= jobData.company_id %> ">
+                                    <img src="<%= jobData.company_avatar %>"  alt="" class="main__company__img">
+                                </a>
+                                
+                                <div class="main__company__info">
+                                    <a href="/company/<%= jobData.company_id %> ">
+                                        <h5 class="main__company__name">
+                                            <%= jobData.company_name %> 
+                                        </h5>
+                                    </a>
+                                    
+                                    <div class="main__company__content">
+                                        <p><i class="far fa-calendar-alt"></i><span style="padding-left: 10px;"></span><%= jobData.timeserving %> </p>
+                                        <p><i class="far fa-clock"></i><span style="padding-left: 10px;"></span><%= jobData.overtime == 0 ? 'No OT' : 'OT' %></p>
+                                        <p><i class="fas fa-map-marker-alt"></i><span style="padding-left: 10px;"></span><%= jobData.province_name %> </p>
+
+                                    </div>
+                                    <a href="/company/<%= jobData.company_id %> " class="main__company__link">
+                                        <button class="btn btn-primary">Go to our page</button>
+                                    </a>
                                 </div>
-                                <div class="company__tech company__item">
-                                    <h2 class="title">
-                                        Chuyên môn của chúng tôi
-                                    </h2>
-                                    <% techCompanyData.forEach(tech => { %> 
+                            </div>
+                            <div class="main__job">
+                                
+                                <h1 class="job__title"><%= jobData.job_title %> </h1>
+                                <div class="job__tech__list job__item">
+                                    <% techJobData.forEach(tech => { %> 
                                         <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
                                     <% }) %> 
                                 </div>
-                                <div class="company__treatment company__item">
-                                    <h2 class="title">
-                                        Đãi Ngộ
-                                    </h2>
+                                <div class="job__salary job__item">
+                                    <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> <%= (jobData.min_salary || '?') + ' - ' + (jobData.max_salary || '?')%> </p>
+                                </div>
+                                <div class="job__address job__item">
+                                    <p><i class="fas fa-map-marker-alt"></i> <%= jobData.firstAddress %>, <%= jobData.province_name %> </p>
+                                </div>
+                                <a class="job__apply job__item" href="#">
+                                    <button class="btn btn-danger">Ứng Tuyển</button>
+                                </a>
+                                <div class="job__description job__item">
+                                    <h2 class="title">Mô tả công việc</h2>
                                     <ul>
-                                        <% companyData.treatment.split(/\r\n/).filter(e => e !== '').forEach(e => {%> 
+                                        <% jobData.job_description.split(/\r\n/).forEach(e => {%> 
                                             <li class="content"><%= e %> </li>
                                         <% })  %> 
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="main__tab__content" id='review'>
-                                
-                               
+                                <div class="job__require job__item">
+                                    <h2 class="title">Yêu cầu công việc</h2>
+                                    <ul>
+                                        <% jobData.job_require.split(/\r\n/).forEach(e => {%> 
+                                            <li class="content"><%= e %> </li>
+                                        <% })  %>
+                                    </ul>
+                                </div>
+                                <div class="job__treatment job__item">
+                                    <h2 class="title">Đãi Ngộ</h2>
+                                    <ul>
+                                        <% jobData.treatment.split(/\r\n/).forEach(e => {%> 
+                                            <li class="content"><%= e %> </li>
+                                        <% })  %>
+                                    </ul>
+                                </div>
+                                <a class="job__apply job__item" href="#">
+                                    <button class="btn btn-danger">Ứng Tuyển</button>
+                                </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -294,6 +298,5 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="/js/company.js"></script>
     </body>
 </html>

@@ -31,6 +31,7 @@ cloudinary.config({
     api_key: process.env.CLOUD_API_KEY, 
     api_secret: process.env.CLOUD_API_SECRET,
 });
+
 app.use(express.static(path.join(__dirname, "public")));
 
 //app.set("views", path.join(__dirname, "views"));
@@ -38,3 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.listen(PORT, () => console.log(`Your app is listening on port ${PORT}`));
 
 route(app);
+const now = new Date();
+const timeServing = `${now.getFullYear()}-${now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth()}-${now.getDate() < 10 ? '0' + now.getDate() : now.getDate()} ${now.toTimeString().substring(0, 8)}`;
+console.log(timeServing)
+
