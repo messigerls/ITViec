@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/fonts/icon/css/all.css" />
     <link rel="stylesheet" href="/css/base.css" />
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
 </head>
 <body>
     <div class="app">
@@ -76,9 +76,11 @@
             </div>
         </header>
         <main>
+            
             <div class="main">
                 
                 <form method="POST" action="/login" class="main__form">
+                    <img src="/img/avatar.png" class="avatar_img">
                     <div class="form-group">
                         <label for="exampleInputUserName">Tên đăng nhập</label>
                         <input type="text" class="form-control" id="exampleInputUserName" name="username" />

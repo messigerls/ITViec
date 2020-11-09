@@ -28,7 +28,7 @@ app.use(
 );
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY, 
+    api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
@@ -42,4 +42,3 @@ route(app);
 const now = new Date();
 const timeServing = `${now.getFullYear()}-${now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth()}-${now.getDate() < 10 ? '0' + now.getDate() : now.getDate()} ${now.toTimeString().substring(0, 8)}`;
 console.log(timeServing)
-
