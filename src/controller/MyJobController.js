@@ -5,6 +5,7 @@ const Job = require('../models/job')
 const Company = require('../models/company')
 const TechJob = require('../models/techjob');
 const Province = require('../models/province')
+const Technology = require('../models/technology')
 const {getTechJob , getDistanceTime} = require('../helpers/helper')
 
 class MyJobController {
@@ -46,10 +47,16 @@ class MyJobController {
                 resolve(data)
             })
         })
+        const technologyPromise = new Promise((resolve, reject) => {
+            Technology.getAllTech((err, data) => {
+                if(err) reject(err)
+                resolve(data)
+            })
+        })
 
-        Promise.all([jobPositionPromise, jobsPromise, imgCompanyPromise, techJobPromise, provinceJobPromise])
+        Promise.all([jobPositionPromise, jobsPromise, imgCompanyPromise, techJobPromise, provinceJobPromise, technologyPromise])
             .then(result => {
-                const [jobPositionData, jobData, imgJobData, , provinceJobData] = result;
+                const [jobPositionData, jobData, imgJobData, , provinceJobData, techsData] = result;
                 const techJobData = getTechJob(jobData, result[3]);
                 
                 
@@ -66,6 +73,7 @@ class MyJobController {
                     imgJobData,
                     techJobData,
                     provinceJobData,
+                    techsData,
                 });
             }).catch(err => {
                 return res.status(500).json({
@@ -75,9 +83,17 @@ class MyJobController {
     }
     createJob(req, res){
         const body = req.body;
+        console.log(body)
         Job.insertJob(body, req.session.user.companyId, (err, result) => {
             if(err) res.status(500).json({ err: err })
-            res.redirect('/my-job')
+            Job.getJobIdLast((err, data) => {
+                if(err) res.status(500).json({ err: err })
+                const jobId = data[0].job_id;
+                TechJob.insertTechJob(jobId, body.tech, (err, data) => {
+                    if(err) res.status(500).json({ err: err })
+                    res.redirect('/my-job')
+                })
+            })
         })
         
     }
@@ -95,15 +111,29 @@ class MyJobController {
                     if(err) reject(err)
                     resolve(data)
                 })
+            }),
+            new Promise((resolve, reject) => {
+                TechJob.getTechJobByJobId(id, (err, data) => {
+                    if(err) reject(err);
+                    resolve(data)
+                })
+            }),
+            new Promise((resolve, reject) => {
+                Technology.getAllTech((err, data) => {
+                    if(err) reject(err);
+                    resolve(data)
+                })
             })
         ]).then(result => {
             const jobData = result[0][0];
-            const [ ,jobPositionData] = result;
+            const [ ,jobPositionData, techJobData, techsData] = result;
 
             res.render('company/editmyjob',{
                 user: req.session.user,
                 jobData,
                 jobPositionData,
+                techJobData,
+                techsData
             })
         }).catch(err => {
             return res.status(500).json({err: err})
@@ -112,20 +142,18 @@ class MyJobController {
     postEditMyJob(req, res){
         const body = req.body;
         const id = req.params.id;
-        
-
-        Promise.all([
-            new Promise((resolve, reject) => {
-                Job.updateJobById(id, {... body}, (err, data) => {
-                    if(err) reject(err);
-                    resolve(data);
+        console.log(body)
+        Job.updateJobById(id, {... body}, (err, data) => {
+            if(err) return res.status(500).json({err: err});
+            TechJob.deleteTechJobByJobId(id, (err, data) => {
+                if(err) return res.status(500).json({err: err});
+                TechJob.insertTechJob(id, body.tech, (err, data) => {
+                    if(err) return res.status(500).json({err: err});
+                    res.redirect(`/my-job`)
                 })
             })
-        ]).then(result => {
-            res.redirect(`/my-job`)
-        }).catch(err => {
-            return res.status(500).json({err: err})
-        })     
+        })
+          
         
     }
     deleteMyJob(req, res){

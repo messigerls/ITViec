@@ -10,7 +10,6 @@ function getTechJob(jobData, techJobData){
                 })
             }
         })
-      
         return {
             job_id : techJob,
             technology_arr : jobTechArr,

@@ -1,8 +1,9 @@
 const jobSearch = require("../models/job-search");
 const JobCompany = require('../models/job-company');
 const TechJob = require('../models/techjob');
+const Account = require('../models/account');
 const Apply = require('../models/apply')
-const {getTechJob , getDistanceTime} = require('../helpers/helper');
+const { getTechJob , getDistanceTime } = require('../helpers/helper');
 
 
 class ApiController{
@@ -10,7 +11,6 @@ class ApiController{
       
       const {city, search } = req.params;
       
-    
       new Promise((resolve, reject) => {
          if(city && search){
             console.log(req.params)
@@ -46,7 +46,7 @@ class ApiController{
                })
             }
             if(city == 'da-nang'){
-               console.log('da nang')
+               
                jobSearch.searchJobByOnlyCity('Đà Nẵng', (err, data) => {
                   if(err) reject (err);
                   resolve(data);
@@ -64,7 +64,7 @@ class ApiController{
                resolve(data);
             })
          }
-         console.log(req.params)
+         
          jobSearch.searchAllJob((err, data) => {
             if(err) reject(err)
             resolve(data);
@@ -92,7 +92,7 @@ class ApiController{
             
             jobCompany.map(e => {
                techJobData.map(tech => {
-                  console.log(tech.job_id === e.job_id)
+                  
                   if(tech.job_id === e.job_id){
                      Object.assign(e, {technology_arr : tech.technology_arr})
                   }
@@ -112,6 +112,11 @@ class ApiController{
       Apply.deleteApplyJob(id, (err, data) => {
          if(err) return res.status(500).json({ err: err });
          return res.status(200).json({ message : 'success' })
+      })
+   }
+   getAccountIdLast(req, res){
+      Account.getAccountId((err, data) => {
+         res.send(data[0])
       })
    }
 }

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Edit My Job</title>
+        <title>Edit My Job | UR Job</title>
         <link rel="icon" href="/img/logo.png" />
         <link
             rel="stylesheet"
@@ -12,6 +12,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="/fonts/icon/css/all.css">
         <link rel="stylesheet" href="/css/base.css" />
+        <link rel="stylesheet" href="/css/editjob.css" />
     </head>
     <body>
         <div class="app">
@@ -36,19 +37,11 @@
                                         <a class="nav-link menu__item" href="/">Home
                                             <span class="sr-only">(current)</span></a>
                                     </li>
-                                    <% if(user){ %>     
-                                        <% if(user.role === 2) {%>
-                                            <li class="nav-item">
-                                                <a class="nav-link menu__item" href="/candidate">Tìm kiếm ứng viên</a>
-                                            </li>
-                                        <% } %> 
-                                    <% } %> 
+                                    
                                     <li class="nav-item">
-                                        <a class="nav-link menu__item" href="/job-list">Việc làm IT</a>
+                                        <a class="nav-link menu__item" href="/job-list/all">Việc làm IT</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu__item" href="/top-company">Top Công Ty</a>
-                                    </li>
+                                    
                                     <% if(!user){ %>
                                         <li class="nav-item">
                                             <a class="nav-link menu__item" href="/login">Đăng Nhập</a>
@@ -82,51 +75,69 @@
             <main>
                 <div class="width_box">
                     <div class="main">
-                        <h1>Edit Job</h1>
+                        <h1>Chỉnh sửa công việc</h1>
                         <form action="/my-job/<%= jobData.job_id %>/edit" method="post">
                             <div class="form-group">
-                                <label for="jobTitle">Title</label>
+                                <label for="jobTitle">Tên công việc</label>
                                 <input type="text" class="form-control" value="<%= jobData.job_title %>" id="jobTitle" name="jobTitle">
                             </div>
-                            <div class="form-group">
-                                <label for="jobPosition">Position</label>
-                                <select name="jobPosition" id="jobPosition" value=<%= jobData.position_id %> >
-                                    <% jobPositionData.forEach((e) => { %>
-                                        <option value=<%= e.position_id %> <%= e.position_id === jobData.position_id ? 'selected' : '' %>> <%= e.position_name %> </option>
-                                    <% }) %> 
-                                </select>
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="jobPosition">Vị trí công việc</label>
+                                            <select name="jobPosition" id="jobPosition" value=<%= jobData.position_id %> class="form-control">
+                                                <% jobPositionData.forEach((e) => { %>
+                                                    <option value=<%= e.position_id %> <%= e.position_id === jobData.position_id ? 'selected' : '' %>> <%= e.position_name %> </option>
+                                                <% }) %> 
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="numberOfJob">Số lượng công việc</label>
+                                            <input type="number" class="form-control" value=<%= jobData.number_of_job %> id="numberOfJob" name="numberOfJob" min="1">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="minSalary">Mức lương tối thiểu</label>
+                                            <input type="number" class="form-control" value=<%= jobData.min_salary %> id="minSalary" name="minSalary" min="0">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="maxSalary">Mức lương tối đa</label>
+                                            <input type="number" class="form-control" value=<%= jobData.max_salary %> id="maxSalary" name="maxSalary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="tech">Các công nghệ sử dụng (Nhất Ctrl để chọn nhiều)</label>
+                                    <select name="tech" id="tech" multiple class="form-control">
+                                       <%  techsData.forEach(tech => { %> 
+                                            <option <%= techJobData.findIndex(e => e.technology_id === tech.technology_id) != -1 ? 'selected' : ''  %>  value="<%= tech.technology_id %>"><%= tech.technology_name %> </option>
+                                        <% }) %> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="numberOfJob">Number Of Job</label>
-                                <input type="number" class="form-control" value=<%= jobData.number_of_job %> id="numberOfJob" name="numberOfJob" min="1">
-                            </div>
-                            <div class="form-group">
-                                <label for="minSalary">Minimum Salary</label>
-                                <input type="number" class="form-control" value=<%= jobData.min_salary %> id="minSalary" name="minSalary" min="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="maxSalary">Maximum Salary</label>
-                                <input type="number" class="form-control" value=<%= jobData.max_salary %> id="maxSalary" name="maxSalary">
-                            </div>
-                            <div class="form-group">
-                                <label for="jobDescription">Description</label>
+                                <label for="jobDescription">Mô tả công việc</label>
                                 <textarea name="jobDescription" id="jobDescription"  class="form-control"rows="10"><%= jobData.job_description %> </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="require">Require</label>
+                                <label for="require">Yêu cầu</label>
                                 <textarea name="require" id="require"  class="form-control" rows="10"><%= jobData.job_require %> </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="timeServing">Time Serving</label>
+                                <label for="timeServing">Thời gian làm việc</label>
                                 <input type="text" class="form-control" value="<%= jobData.timeserving %>" id="timeServing" name="timeServing">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-check"></i> Save
+                                    <i class="fas fa-check"></i> Lưu lại
                                 </button>
                                 
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="far fa-trash-alt"></i> Delete
+                                    <i class="far fa-trash-alt"></i> Xóa
                                 </button>
                                   
                             </div>
@@ -141,118 +152,53 @@
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Kỹ năng
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Java</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >JavaScript</a
-                            >
-                            <a href="#" class="footer__top__group__link">PHP</a>
-                            <a href="#" class="footer__top__group__link">C#</a>
-                            <a href="#" class="footer__top__group__link"
-                                >Android</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/all/Java" class="footer__top__group__link">Java</a>
+                            <a href="/job-list/all/JavaScript" class="footer__top__group__link">JavaScript</a>
+                            <a href="/job-list/all/PHP" class="footer__top__group__link">PHP</a>
+                            <a href="/job-list/all/C" class="footer__top__group__link">C</a>
+                            <a href="/job-list/all/Android" class="footer__top__group__link">Android</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
                         <div class="footer__top__group">
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Cấp bậc
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Tester</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Senior</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Junior</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Fresher</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Internship</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/all/Tester" class="footer__top__group__link">Tester</a>
+                            <a href="/job-list/all/Senior" class="footer__top__group__link">Senior</a>
+                            <a href="/job-list/all/Junior" class="footer__top__group__link">Junior</a>
+                            <a href="/job-list/all/Fresher" class="footer__top__group__link">Fresher</a>
+                            <a href="/job-list/all/Internship" class="footer__top__group__link">Internship</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
-                        <div class="footer__top__group">
-                            <h5 class="footer__top__group__content">
-                                Việc làm IT theo Công ty
-                            </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
-                        </div>
+                        
                         <div class="footer__top__group">
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Thành phố
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Hà Nội</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Hồ Chí Minh</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Đà Nẵng</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/ha-noi" class="footer__top__group__link">Hà Nội</a>
+                            <a href="/job-list/tp-hcm" class="footer__top__group__link">Hồ Chí Minh</a>
+                            <a href="/job-list/da-nang" class="footer__top__group__link">Đà Nẵng</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
                     </div>
                 </div>
                 <div class="footer__bot">
                     <div class="footer__bot__main width_box">
                         <div class="footer__bot__group">
-                            <a href="#" class="footer__bot__item">Trang chủ</a>
-                            <a href="#" class="footer__bot__item"
-                                >Việc làm IT</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Top Company</a
-                            >
+                            <a href="/" class="footer__bot__item">Trang chủ</a>
+                            <a href="/job-list/all" class="footer__bot__item">Việc làm IT</a>
                             <a href="#" class="footer__bot__item">Liên hệ</a>
                         </div>
                         <div class="footer__bot__group">
-                            <a href="#" class="footer__bot__item"
-                                >Quy định bảo mật</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Thỏa thuận sử dụng</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Chính sách giải quyết khiếu nại</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Quy chế hoạt động</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Câu hỏi thường gặp</a
-                            >
+                            <a href="#" class="footer__bot__item">Quy định bảo mật</a>
+                            <a href="#" class="footer__bot__item">Thỏa thuận sử dụng</a>
+                            <a href="#" class="footer__bot__item">Chính sách giải quyết khiếu nại</a>
+                            <a href="#" class="footer__bot__item">Quy chế hoạt động</a>
+                            <a href="#" class="footer__bot__item">Câu hỏi thường gặp</a>
                         </div>
                         <div class="footer__bot__group">
                             <p href="#" class="footer__bot__item">
-                                Copy © TJob
+                                Copy © URJob
                             </p>
                             <p href="#" class="footer__bot__item">
                                 Điện thoại: 0123456789
@@ -280,9 +226,9 @@
                       <h6>Bạn có chắc muốn xóa việc làm này?</h6>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-window-close"></i> Hủy</button>
                       <a href="/my-job/<%= jobData.job_id %>/delete">
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i> Xóa</button>
                       </a>
                     </div>
                   </div>

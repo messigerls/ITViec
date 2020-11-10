@@ -1,9 +1,19 @@
 .formBox{
     display: none;
 }
-
+main{
+    background-color: #E9E9E9;
+}
+.main{
+    background-color: white;
+    padding: 10px 20px;
+}
+.main__job{
+    margin-top: 50px;
+    
+}
 .main__job__item:nth-child(odd){
-    background-color: #f9f9f9;
+    background-color: #fff1e1;
 }
 .main__job__item{
     display: flex;
@@ -81,6 +91,8 @@
     overflow: hidden;
     width: 100%;
     line-height: 1.3em;
+    text-overflow: ellipsis;
+    height: 60px;
 }
 .job__description:hover{
     cursor: context-menu;
@@ -125,4 +137,10 @@
 }
 .job__item__right__bot > span{
     color: #06c;
+}
+select.form-control[multiple], select.form-control[size] {
+    height: 250px;
+}
+h2, .h2{
+    font-weight: bold;
 }

@@ -11,7 +11,7 @@ main{
     
 }
 .candidate{
-    padding: 10px 50px;
+    padding: 30px 50px;
 }
 .candidate__group{
     display: flex;
@@ -19,4 +19,18 @@ main{
 }
 .candidate__group img{
     width: 200px;
+}
+
+.form-group img {
+    width: 70%;
+}
+
+.company{
+    padding: 30px 40px;
+}
+select.form-control[multiple], select.form-control[size] {
+    height: 250px;
+}
+label{
+    font-size: large;
 }

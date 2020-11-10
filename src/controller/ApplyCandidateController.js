@@ -6,7 +6,6 @@ class ApplyCandidateController{
             if(err) return res.status(500).json({ err: err })
             const pendingApplyData = data.filter(e => e.receivedTime === null).map(e => {
                 return Object.assign(e, {distanceApplyTime : getDistanceTime(e.applyTime)})
-                
             });
             const receivedApplyData = data.filter(e => e.receivedTime !== null).map(e => {
                 return Object.assign(e, {distanceReceivedTime : getDistanceTime(e.receivedTime)})

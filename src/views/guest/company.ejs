@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title></title>
+        <title><%= companyData.company_name %> | UR Job</title>
         <link rel="icon" href="/img/logo.png"/>
         <link
             rel="stylesheet"
@@ -37,18 +37,8 @@
                                         <a class="nav-link menu__item" href="/">Home
                                             <span class="sr-only">(current)</span></a>
                                     </li>
-                                    <% if(user){ %>     
-                                        <% if(user.role === 2) {%>
-                                            <li class="nav-item">
-                                                <a class="nav-link menu__item" href="/candidate">Tìm kiếm ứng viên</a>
-                                            </li>
-                                        <% } %> 
-                                    <% } %> 
                                     <li class="nav-item">
-                                        <a class="nav-link menu__item" href="/job-list">Việc làm IT</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link menu__item" href="/top-company">Top Công Ty</a>
+                                        <a class="nav-link menu__item" href="/job-list/all">Việc làm IT</a>
                                     </li>
                                     <% if(!user){ %>
                                         <li class="nav-item">
@@ -73,7 +63,6 @@
                                             </div>
                                         </li>
                                     <% } %> 
-                                    
                                 </ul>
                             </div>
                         </nav>
@@ -92,30 +81,23 @@
                                     <img src="<%= companyData.company_avatar %> " alt="">
                                 </div>
                                 <div class="company__brief">
-                                    <h1 class="company__name"><%= companyData.company_name %> </h1>
+                                    <h1 class="company__name"><%= companyData.company_name %></h1>
                                     <p class="company__brief__item">
                                         <i class="fas fa-map-marker-alt"></i>
                                         <%= companyData.firstAddress %>, 
                                         <%= companyData.province_name %>  
                                     </p>
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>    
-                                    <p class="company__brief__item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <%= companyData.firstAddress %>, 
-                                        <%= companyData.province_name %>  
-                                    </p>
+                                    <% techCompanyData.forEach(tech => { %> 
+                                        <a href="/job-list/all/<%= tech.technology_name %>"  class="job__tech__item"><%= tech.technology_name %></a>
+                                    <% }) %>
                                 </div>
                             </div>
                         </div>
                         <div class="main__main">
-                            <div class="main__tab">
+                            <!-- <div class="main__tab">
                                 <button class="btn btn-primary" onclick="openPage('des')">Giới thiệu</button>
                                 <button class="btn btn-danger" onclick="openPage('review')">Review</button>
-                            </div>
+                            </div> -->
                             <div class="main__tab__content" id='des'>
                                 <div class="job__description company__item">
                                     <h2 class="title">
@@ -146,12 +128,9 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="main__tab__content" id='review'>
-                                
-                               
-                            </div>
+                            <!-- <div class="main__tab__content" id='review'>
+                            </div> -->
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -162,118 +141,53 @@
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Kỹ năng
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Java</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >JavaScript</a
-                            >
-                            <a href="#" class="footer__top__group__link">PHP</a>
-                            <a href="#" class="footer__top__group__link">C#</a>
-                            <a href="#" class="footer__top__group__link"
-                                >Android</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/all/Java" class="footer__top__group__link">Java</a>
+                            <a href="/job-list/all/JavaScript" class="footer__top__group__link">JavaScript</a>
+                            <a href="/job-list/all/PHP" class="footer__top__group__link">PHP</a>
+                            <a href="/job-list/all/C" class="footer__top__group__link">C</a>
+                            <a href="/job-list/all/Android" class="footer__top__group__link">Android</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
                         <div class="footer__top__group">
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Cấp bậc
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Tester</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Senior</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Junior</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Fresher</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Internship</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/all/Tester" class="footer__top__group__link">Tester</a>
+                            <a href="/job-list/all/Senior" class="footer__top__group__link">Senior</a>
+                            <a href="/job-list/all/Junior" class="footer__top__group__link">Junior</a>
+                            <a href="/job-list/all/Fresher" class="footer__top__group__link">Fresher</a>
+                            <a href="/job-list/all/Internship" class="footer__top__group__link">Internship</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
-                        <div class="footer__top__group">
-                            <h5 class="footer__top__group__content">
-                                Việc làm IT theo Công ty
-                            </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Company</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
-                        </div>
+                        
                         <div class="footer__top__group">
                             <h5 class="footer__top__group__content">
                                 Việc làm IT theo Thành phố
                             </h5>
-                            <a href="#" class="footer__top__group__link"
-                                >Hà Nội</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Hồ Chí Minh</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Đà Nẵng</a
-                            >
-                            <a href="#" class="footer__top__group__link"
-                                >Xem tất cả</a
-                            >
+                            <a href="/job-list/ha-noi" class="footer__top__group__link">Hà Nội</a>
+                            <a href="/job-list/tp-hcm" class="footer__top__group__link">Hồ Chí Minh</a>
+                            <a href="/job-list/da-nang" class="footer__top__group__link">Đà Nẵng</a>
+                            <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                         </div>
                     </div>
                 </div>
                 <div class="footer__bot">
                     <div class="footer__bot__main width_box">
                         <div class="footer__bot__group">
-                            <a href="#" class="footer__bot__item">Trang chủ</a>
-                            <a href="#" class="footer__bot__item"
-                                >Việc làm IT</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Top Company</a
-                            >
+                            <a href="/" class="footer__bot__item">Trang chủ</a>
+                            <a href="/job-list/all" class="footer__bot__item">Việc làm IT</a>
                             <a href="#" class="footer__bot__item">Liên hệ</a>
                         </div>
                         <div class="footer__bot__group">
-                            <a href="#" class="footer__bot__item"
-                                >Quy định bảo mật</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Thỏa thuận sử dụng</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Chính sách giải quyết khiếu nại</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Quy chế hoạt động</a
-                            >
-                            <a href="#" class="footer__bot__item"
-                                >Câu hỏi thường gặp</a
-                            >
+                            <a href="#" class="footer__bot__item">Quy định bảo mật</a>
+                            <a href="#" class="footer__bot__item">Thỏa thuận sử dụng</a>
+                            <a href="#" class="footer__bot__item">Chính sách giải quyết khiếu nại</a>
+                            <a href="#" class="footer__bot__item">Quy chế hoạt động</a>
+                            <a href="#" class="footer__bot__item">Câu hỏi thường gặp</a>
                         </div>
                         <div class="footer__bot__group">
                             <p href="#" class="footer__bot__item">
-                                Copy © TJob
+                                Copy © URJob
                             </p>
                             <p href="#" class="footer__bot__item">
                                 Điện thoại: 0123456789
@@ -289,7 +203,6 @@
                 </div>
             </footer>
         </div>
-
         <!-- Bootstrap -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

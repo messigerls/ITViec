@@ -10,6 +10,7 @@ const apiRouter = require('./apiRouter')
 const jobRouter = require('../routers/jobRouter')
 const applyJobRouter = require('./applyJobRouter')
 const applyCandidateRouter = require('./applyCandidateRouter');
+const {authUser} = require('../middleware/authentication')
 
 module.exports = (app) => {
     app.use('/login', loginRouter)

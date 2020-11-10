@@ -5,7 +5,8 @@ const Candidate = require('../models/candidate')
 class LoginController {
     getLogin(req, res) {
         res.render("guest/login", {
-            user: req.session.user
+            user: req.session.user,
+            userMessage: ''
         });
     }
 
@@ -16,17 +17,21 @@ class LoginController {
             if (err) return res.status(500).send({ err });
 
             if (!result.length)
-                return res
-                    .status(403)
-                    .send({ message: "khong tim thay ten dang nhap " });
+                
+                res.render("guest/login", {
+                    user: req.session.user,
+                    userMessage: 'Không tìm thấy tên đăng nhập'
+                });
             const comparePassword = await bcrypt.compare(
                 body.password,
                 result[0].password
             );
             if (!comparePassword)
-                return res
-                    .status(400)
-                    .send({ message: "Ban da nhap sai ten hoac mat khau" });
+                res.render("guest/login", {
+                    user: req.session.user,
+                    userMessage: 'Bạn đã nhập sai tên đăng nhập hoặc mật khẩu'
+                });
+                
             new Promise((resolve, reject) => {
                 if(result[0].role === 2){
                     Company.getCompanyIdByAccountId(result[0].id, (err, data) => {

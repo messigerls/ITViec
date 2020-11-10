@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Register | UR Job</title>
+    <link rel="icon" href="/img/logo.png" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/fonts/icon/css/all.css">
     <link rel="stylesheet" href="/css/base.css" />
@@ -34,19 +35,11 @@
                                     <a class="nav-link menu__item" href="/">Home
                                         <span class="sr-only">(current)</span></a>
                                 </li>
-                                <% if(user){ %>     
-                                    <% if(user.role === 2) {%>
-                                        <li class="nav-item">
-                                            <a class="nav-link menu__item" href="/candidate">Tìm kiếm ứng viên</a>
-                                        </li>
-                                    <% } %> 
-                                <% } %> 
+                                 
                                 <li class="nav-item">
-                                    <a class="nav-link menu__item" href="/job-list">Việc làm IT</a>
+                                    <a class="nav-link menu__item" href="/job-list/all">Việc làm IT</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link menu__item" href="/top-company">Top Công Ty</a>
-                                </li>
+                                
                                 <% if(!user){ %>
                                     <li class="nav-item">
                                         <a class="nav-link menu__item" href="/login">Đăng Nhập</a>
@@ -78,44 +71,53 @@
             </div>
         </header>
         <main>
-            <div class="">
-                <form method="POST" action="/register" class="main__form width__box">
-                    <div class="form-group">
-                        <label for="InputUserName">Tên đăng ký</label>
-                        <input type="text" class="form-control" id="InputUserName" name="username" />
-                    </div>
-                    <div class="form-group">
-                        <label for="InputPassword">Mật khẩu</label>
-                        <input type="password" class="form-control" id="InputPassword" name="password" />
-                    </div>
-                    <div class="form-group">
-                        <label for="InputRePassword">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="InputRePassword" name="re_password" />
-                    </div>
-                    <div class="form-group">
-                        <label for="InputEmail">Email address</label>
-                        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
-                            name="email" />
-                        <small id="emailHelp" class="form-text text-muted"></small>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="SDT">SDT</label>
-                            <input type="text" class="form-control" id="SDT" name="sdt" />
+            <div class="width_box">
+                <div class="main">
+                    <form method="POST" action="/register" class="main__form width__box">
+                        <% if(message){ %> 
+                            <small><%= message %> </small>
+                        <% } %> 
+                        <div class="form-group">
+                            <label for="InputUserName">Tên đăng ký</label>
+                            <input type="text" class="form-control" id="InputUserName" name="username" />
                         </div>
-                        <div class="form-group col-6">
-                            <label for="role">Role</label>
-                            <select class="custom-select" id="role" name="role">
-                                <option value="2">Nhà tuyển dụng</option>
-                                <option value="1" selected>Người tìm việc</option>
-
-                            </select>
+                        <div class="form-group">
+                            <label for="InputPassword">Mật khẩu</label>
+                            <input type="password" class="form-control" id="InputPassword" name="password" />
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Đăng ký
-                    </button>
-                </form>
+                        <div class="form-group">
+                            <label for="InputRePassword">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" id="InputRePassword" name="re_password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Tên</label>
+                            <input type="text" class="form-control" id="Name" name="name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Email address</label>
+                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp"
+                                name="email" />
+                            <small id="emailHelp" class="form-text text-muted"></small>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="SDT">SDT</label>
+                                <input type="text" class="form-control" id="SDT" name="sdt" />
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="role">Role</label>
+                                <select class="custom-select" id="role" name="role">
+                                    <option value="2">Nhà tuyển dụng</option>
+                                    <option value="1" selected>Người tìm việc</option>
+    
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Đăng ký
+                        </button>
+                    </form>
+                </div>
             </div>
         </main>
         <footer>
@@ -125,52 +127,41 @@
                         <h5 class="footer__top__group__content">
                             Việc làm IT theo Kỹ năng
                         </h5>
-                        <a href="#" class="footer__top__group__link">Java</a>
-                        <a href="#" class="footer__top__group__link">JavaScript</a>
-                        <a href="#" class="footer__top__group__link">PHP</a>
-                        <a href="#" class="footer__top__group__link">C#</a>
-                        <a href="#" class="footer__top__group__link">Android</a>
-                        <a href="#" class="footer__top__group__link">Xem tất cả</a>
+                        <a href="/job-list/all/Java" class="footer__top__group__link">Java</a>
+                        <a href="/job-list/all/JavaScript" class="footer__top__group__link">JavaScript</a>
+                        <a href="/job-list/all/PHP" class="footer__top__group__link">PHP</a>
+                        <a href="/job-list/all/C" class="footer__top__group__link">C</a>
+                        <a href="/job-list/all/Android" class="footer__top__group__link">Android</a>
+                        <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                     </div>
                     <div class="footer__top__group">
                         <h5 class="footer__top__group__content">
                             Việc làm IT theo Cấp bậc
                         </h5>
-                        <a href="#" class="footer__top__group__link">Tester</a>
-                        <a href="#" class="footer__top__group__link">Senior</a>
-                        <a href="#" class="footer__top__group__link">Junior</a>
-                        <a href="#" class="footer__top__group__link">Fresher</a>
-                        <a href="#" class="footer__top__group__link">Internship</a>
-                        <a href="#" class="footer__top__group__link">Xem tất cả</a>
+                        <a href="/job-list/all/Tester" class="footer__top__group__link">Tester</a>
+                        <a href="/job-list/all/Senior" class="footer__top__group__link">Senior</a>
+                        <a href="/job-list/all/Junior" class="footer__top__group__link">Junior</a>
+                        <a href="/job-list/all/Fresher" class="footer__top__group__link">Fresher</a>
+                        <a href="/job-list/all/Internship" class="footer__top__group__link">Internship</a>
+                        <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                     </div>
-                    <div class="footer__top__group">
-                        <h5 class="footer__top__group__content">
-                            Việc làm IT theo Công ty
-                        </h5>
-                        <a href="#" class="footer__top__group__link">Company</a>
-                        <a href="#" class="footer__top__group__link">Company</a>
-                        <a href="#" class="footer__top__group__link">Company</a>
-                        <a href="#" class="footer__top__group__link">Company</a>
-                        <a href="#" class="footer__top__group__link">Company</a>
-                        <a href="#" class="footer__top__group__link">Xem tất cả</a>
-                    </div>
+                    
                     <div class="footer__top__group">
                         <h5 class="footer__top__group__content">
                             Việc làm IT theo Thành phố
                         </h5>
-                        <a href="#" class="footer__top__group__link">Hà Nội</a>
-                        <a href="#" class="footer__top__group__link">Hồ Chí Minh</a>
-                        <a href="#" class="footer__top__group__link">Đà Nẵng</a>
-                        <a href="#" class="footer__top__group__link">Xem tất cả</a>
+                        <a href="/job-list/ha-noi" class="footer__top__group__link">Hà Nội</a>
+                        <a href="/job-list/tp-hcm" class="footer__top__group__link">Hồ Chí Minh</a>
+                        <a href="/job-list/da-nang" class="footer__top__group__link">Đà Nẵng</a>
+                        <a href="/job-list/all" class="footer__top__group__link">Xem tất cả</a>
                     </div>
                 </div>
             </div>
             <div class="footer__bot">
                 <div class="footer__bot__main width_box">
                     <div class="footer__bot__group">
-                        <a href="#" class="footer__bot__item">Trang chủ</a>
-                        <a href="#" class="footer__bot__item">Việc làm IT</a>
-                        <a href="#" class="footer__bot__item">Top Company</a>
+                        <a href="/" class="footer__bot__item">Trang chủ</a>
+                        <a href="/job-list/all" class="footer__bot__item">Việc làm IT</a>
                         <a href="#" class="footer__bot__item">Liên hệ</a>
                     </div>
                     <div class="footer__bot__group">
@@ -182,7 +173,7 @@
                     </div>
                     <div class="footer__bot__group">
                         <p href="#" class="footer__bot__item">
-                            Copy © TJob
+                            Copy © URJob
                         </p>
                         <p href="#" class="footer__bot__item">
                             Điện thoại: 0123456789

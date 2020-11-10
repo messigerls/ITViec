@@ -1,6 +1,6 @@
 function authUser(req, res, next) {
     if (!req.user) {
-        return res.status(403).send({ message: "You need to Sign In" });
+        res.redirect('/login')
     }
     next();
 }
@@ -26,4 +26,17 @@ function authLogout(req, res, next){
     return res.status(404).send({ message : 'Not Found' })
 }
 
-module.exports = { authUser, authRole, authLogin, authLogout };
+function authCandidate(req, res, next){
+    if(req.session.user.role == 1){
+        next()
+    }
+    res.json({ message: 'Not Allowed' })
+}
+function authCompany(req, res, next){
+    if(req.session.user.role == 2){
+        next()
+    }
+    res.json({ message: 'Not Allowed' })
+}
+
+module.exports = { authUser, authRole, authLogin, authLogout, authCandidate, authCompany };
