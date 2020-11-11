@@ -1,0 +1,214 @@
+.bg-img {
+    background: url("https://images.pexels.com/photos/34088/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .bg-img:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  .content {
+      margin-top: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 9;
+    text-align: center;
+    padding: 20px 32px;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+  }
+  .content h1 {
+    color: white;
+    font-size: 33px;
+    font-weight: 600;
+    margin: 0 0 35px 0;
+    font-family: "Montserrat", sans-serif;
+  }
+  .field {
+    position: relative;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    background: rgba(255, 255, 255, 0.94);
+    margin-top: 20px;
+  }
+  .field span {
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+  }
+  .field input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  }
+  .space {
+    margin-top: 16px;
+  }
+  .show {
+    position: absolute;
+    right: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    display: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+  }
+  .pass-key:valid ~ .show {
+    display: block;
+  }
+  .pass {
+    text-align: left;
+    margin: 10px 0;
+  }
+  .pass a {
+    color: white;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+  }
+  .pass:hover a {
+    text-decoration: underline;
+  }
+  .field input[type="submit"] {
+    background: #3498db;
+    border: 1px solid #2691d9;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+  }
+  .field input[type="submit"]:hover {
+    background: #2691d9;
+  }
+  .login {
+    color: white;
+    margin: 20px 0;
+    font-family: "Poppins", sans-serif;
+  }
+  .links {
+    display: flex;
+    cursor: pointer;
+    color: white;
+    margin: 0 0 20px 0;
+  }
+  .facebook,
+  .instagram {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    margin-left: 10px;
+  }
+  .facebook {
+    margin-left: 0;
+    background: #4267b2;
+    border: 1px solid #3e61a8;
+  }
+  .instagram {
+    background: #e1306c;
+    border: 1px solid #df2060;
+  }
+  .facebook:hover {
+    background: #3e61a8;
+  }
+  .instagram:hover {
+    background: #df2060;
+  }
+  .links i {
+    font-size: 17px;
+  }
+  i span {
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  }
+  .signup {
+    font-size: 15px;
+    color: white;
+    font-family: "Poppins", sans-serif;
+  }
+  .signup a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  .signup a:hover {
+    text-decoration: underline;
+  }
+.form__group{
+    margin-top: 10px;
+    
+}
+.form__group input{
+    width: 10px;
+    height: 10px;
+}
+.form__group label{
+    color: white;
+}
+.custom_radio{
+    margin: 20px;
+ }
+ .custom_radio label{
+     color: white;
+ }
+ .custom_radio input[type="radio"]{
+   display: none;
+ }
+ .custom_radio input[type="radio"] + label{
+   position: relative;
+   display: inline-block;
+   padding-left: 1.5em;
+   margin-right: 2em;
+   cursor: pointer;
+   line-height: 1em;
+   -webkit-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+ }
+ .custom_radio input[type="radio"] + label:before,
+ .custom_radio input[type="radio"] + label:after{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 1em;
+   height: 1em;
+   text-align: center;
+   color: white;
+   font-family: Times;
+   border-radius: 50%;
+   -webkit-transition: all .3s ease;
+   transition: all .3s ease;
+ }
+ .custom_radio input[type="radio"] + label:before {
+   -webkit-transition: all .3s ease;
+   transition: all .3s ease;
+   box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em white;
+ }
+ .custom_radio input[type="radio"] + label:hover:before {
+   -webkit-transition: all .3s ease;
+   transition: all .3s ease;
+   box-shadow: inset 0 0 0 0.3em white, inset 0 0 0 1em #c6c6c6;
+ }
+ .custom_radio input[type="radio"]:checked + label:before {
+   -webkit-transition: all .3s ease;
+   transition: all .3s ease;
+   box-shadow: inset 0 0 0 0.2em white, inset 0 0 0 1em #E1306C;
+ }

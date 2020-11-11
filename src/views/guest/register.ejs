@@ -71,12 +71,10 @@
             </div>
         </header>
         <main>
-            <div class="width_box">
+            <!-- <div class="width_box">
                 <div class="main">
                     <form method="POST" action="/register" class="main__form width__box">
-                        <% if(message){ %> 
-                            <small><%= message %> </small>
-                        <% } %> 
+                        
                         <div class="form-group">
                             <label for="InputUserName">Tên đăng ký</label>
                             <input type="text" class="form-control" id="InputUserName" name="username" />
@@ -117,6 +115,95 @@
                             Đăng ký
                         </button>
                     </form>
+                </div>
+            </div> -->
+            <div class="bg-img">
+                <div class="content">
+                    <h1>Đăng ký</h1>
+                    <form method="POST" action="/register">
+                        <div class="field">
+                            <span class="fa fa-user"></span>
+                            <input
+                                type="text"
+                                required
+                                placeholder="Tên đăng nhập"
+                                name="username"
+                            />
+                        </div>
+                        <div class="field space">
+                            <span class="fa fa-lock"></span>
+                            <input
+                                type="password"
+                                class="pass-key"
+                                required
+                                placeholder="Mật khẩu"
+                                name="password"
+                            />
+                        </div>
+                        <div class="field space">
+                            <span class="fa fa-lock"></span>
+                            <input
+                                type="password"
+                                class="pass-key"
+                                required
+                                placeholder="Nhập lại mật khẩu"
+                                name="re_password"
+                            />
+                        </div>
+                        <div class="field">
+                            <span class="fas fa-user-circle"></span>
+                            <input
+                                type="text"
+                                required
+                                placeholder="Họ và Tên"
+                                name="name"
+                            />
+                        </div>
+                        <div class="field">
+                            <span class="fas fa-envelope"></span>
+                            <input
+                                type="text"
+                                placeholder="Email"
+                                id="InputEmail" aria-describedby="emailHelp"
+                                name="email"
+                            />
+                        </div>
+                        <div class="field">
+                            <span class="fas fa-phone-square-alt"></span>
+                            <input
+                                type="text"
+                                placeholder="Số điện thoại"
+                                name="sdt"
+                            />
+                        </div>
+                        <div class="custom_radio">
+                            <input type="radio" id="candidate" name="role" checked value="1"><label for="candidate" >Người tìm việc</label>
+                            <input type="radio" id="company" name="role" value="2"><label for="company" >Nhà tuyển dụng</label>
+                        </div>
+                        <div class="field">
+                            <% if(message){ %> 
+                                <small><%= message %> </small>
+                            <% } %>
+                            <input type="submit" value="ĐĂNG KÝ" />
+                        </div>
+                    </form>
+                    <div class="login">Hoặc đăng ký với</div>
+                    <div class="links">
+                        <div class="facebook">
+                            <i class="fab fa-facebook-f"
+                                ><span>Facebook</span></i
+                            >
+                        </div>
+                        <div class="instagram">
+                            <i class="fab fa-instagram"
+                                ><span>Instagram</span></i
+                            >
+                        </div>
+                    </div>
+                    <div class="signup">
+                        Đã có tài khoản?
+                        <a href="/login">Đăng nhập</a>
+                    </div>
                 </div>
             </div>
         </main>

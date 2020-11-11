@@ -32,7 +32,7 @@ class RegisterController {
                         user: req.session.user
                     })
                 }
-                
+                console.log(body)
                 if(body.role == 1){
                     Account.insertAccount(accountId, body, (err, data) => {
                         if(err) reject(err)
