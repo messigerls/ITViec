@@ -98,7 +98,7 @@
                                             <% if(apply.cv == null) {%> 
                                                 <td>Chưa có CV</td>
                                             <% } else{ %> 
-                                                <td><a href="#">Xem CV</a></td>
+                                                <td><a href="<%= apply.cv.replace('/upload', '/upload/f_auto,fl_attachment') %>" target="_blank">Xem CV</a></td>
                                             <% } %> 
                                             
                                             <td><%= apply.distanceApplyTime %> </td>
@@ -133,7 +133,7 @@
                                             <% if(apply.cv == null) {%> 
                                                 <td>Chưa có CV</td>
                                             <% } else{ %> 
-                                                <td><a href="<%= apply.cv %> ">Xem CV</a></td>
+                                                <td><a href="<%= apply.cv.replace('/upload', '/upload/f_auto,fl_attachment') %> " target="_blank">Xem CV</a></td>
                                             <% } %> 
                                             <td><%= apply.distanceReceivedTime %> </td>
                                         </tr>

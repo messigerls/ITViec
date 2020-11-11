@@ -43,4 +43,5 @@ route(app);
 // const timeServing = `${now.getFullYear()}-${now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth()}-${now.getDate() < 10 ? '0' + now.getDate() : now.getDate()} ${now.toTimeString().substring(0, 8)}`;
 // console.log(timeServing)
 
-console.log()
+const url = 'https://res.cloudinary.com/dsysolkex/image/upload/v1605093083/vkpkqthc1dpe5dlob7ox.pdf';
+console.log(url.replace('/upload', '/upload/f_auto,fl_attachment'));

@@ -1,6 +1,6 @@
 .bg-img {
     background: url("https://images.pexels.com/photos/34088/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    height: 100vh;
+    height: 1000px;
     background-size: cover;
     background-position: center;
   }
@@ -9,12 +9,12 @@
     content: "";
     top: 0;
     left: 0;
-    height: 100%;
+    height: 1050px;
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
   }
   .content {
-      margin-top: 40px;
+      margin-top: 150px;
     position: absolute;
     top: 50%;
     left: 50%;

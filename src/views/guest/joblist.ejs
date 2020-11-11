@@ -114,7 +114,7 @@
                     </div>
                     
                     <div class="main__job">
-                        <% jobData.forEach(job => { %> 
+                        <% jobData.reverse().forEach(job => { %> 
                             <div class="main__job__item">
                                 <div class="job__item__left">
                                     <a href="/company/<%= job.company_id %>">
