@@ -86,7 +86,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cv">CV : </label>
-                                        <a href="<%= candidate.cv.replace('/upload', '/upload/f_auto,fl_attachment') %> " target="_blank">CV của bạn</a>
+                                        <% if(candidate.cv){%> 
+                                            <a href="<%= candidate.cv.replace('/upload', '/upload/f_auto,fl_attachment') %> " target="_blank">CV của bạn</a>
+                                        <% }else{ %> 
+                                            <span>Chưa có CV</span>
+                                        <% } %> 
                                     </div>
                                     <div class="form-group">
                                         <label for="cv">Thay đổi CV : </label>
