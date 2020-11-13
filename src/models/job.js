@@ -2,9 +2,9 @@ const connection = require("../config/connectDatabase");
 const { getDateTimeNow } = require("../helpers/database");
 class Job {
     getAllJob() {}
+   
     insertJob(job, companyId, func) {
         const updateTime = getDateTimeNow();
-
         const query = `INSERT INTO job (company_id, position_id, job_title, number_of_job, min_salary, max_salary, job_description, job_require, overtime, timeserving, update_time) VALUES (${companyId}, ${job.addPosition}, "${job.addTitle}", ${job.addNumberJob}, ${job.addMinSalary == null || undefined ? 0 : job.addMinSalary}, ${job.addMaxSalary == null || undefined ? 0 : job.addMaxSalary}, "${job.addDescription}", "${job.addRequire}", ${job.addOverTime}, "${job.addTimeServing}", "${updateTime}")`;
         connection.query(
             query,
