@@ -62,22 +62,144 @@ class Job {
         }
         connection.query(queryCity, func);
     }
+    getJobByCitySearchLimit(search, page, limit, func){
+        const offset = (page - 1) * limit;
+        const queryCity = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id WHERE p.province_name = '${search}' LIMIT ${offset}, ${limit}`;
+        const queryAll = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id  LIMIT ${offset}, ${limit}`;
+        if(search == 'all'){
+            connection.query(queryAll, func)
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    countJobCitySearch(search, func){
+        const queryCity = `SELECT COUNT(job_id) AS countJob FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id WHERE p.province_name = '${search}'`;
+        const queryAll = `SELECT COUNT(j.job_id) AS countJob FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id`;
+        if(search == 'all'){
+            connection.query(queryAll, func)
+        }else{
+            connection.query(queryCity, func);
+        }
+        
+    }
     getJobBySearch(search, city, func){ 
         const queryAll = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name,  t.technology_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%' GROUP BY j.job_id`;
         const queryCity = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name,  t.technology_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE p.province_name = '${city}' AND (LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%') GROUP BY j.job_id`;
         if(city == 'all'){
-             console.log(queryAll)
              connection.query(queryAll, func);
         }else{
-            console.log(queryCity)
             connection.query(queryCity, func);
         }
-        
+    }
+    getJobBySearchLimit(search, city, page, limit, func){ 
+        const offset = (page - 1) * limit;
+        const queryAll = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name,  t.technology_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%' GROUP BY j.job_id  LIMIT ${offset}, ${limit}`;
+        const queryCity = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name,  t.technology_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE p.province_name = '${city}' AND (LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%') GROUP BY j.job_id  LIMIT ${offset}, ${limit}`;
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    countJobSearch(search, city, func){
+        const queryAll = `SELECT COUNT(j.job_id) AS countJob FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%' GROUP BY j.job_id`;
+        const queryCity = `SELECT COUNT(j.job_id) AS countJob FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE p.province_name = '${city}' AND (LOWER(c.company_name) LIKE '%${search}%' OR LOWER(j.job_title) LIKE '%${search}%' OR LOWER(jp.position_name) LIKE '%$${search}%' OR LOWER(t.technology_name) LIKE '%${search}%') GROUP BY j.job_id`;
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
     }
     countJob(func){
         const query = `SELECT COUNT(job_id) AS countJob FROM job`;
         connection.query(query, func);
     }
+    getJobIdByJobTitle(search, city, page, limit, func){
+        const offset = (page - 1) * limit;
+        const queryAll = `SELECT j.job_id FROM job j WHERE LOWER(j.job_title) LIKE '%${search}%' `;
+        let cityId = null;
+        if(city == 'Hà Nội'){
+            cityId = 1;
+        }
+        if(city == 'Đà Nẵng'){
+            cityId = 3;
+        }
+        if(city == 'TP HCM'){
+            cityId = 2;
+        }
+        const queryCity = `SELECT j.job_id FROM job j INNER JOIN company c ON c.company_id = j.company_id  WHERE c.province_id = '${cityId}' AND LOWER(j.job_title) LIKE '%${search}%'`
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    getJobIdByCompanyName(search, city, page, limit, func){
+        const offset = (page - 1) * limit;
+        const queryAll = `SELECT j.job_id FROM job j INNER JOIN company c ON c.company_id = j.company_id WHERE LOWER(c.company_name) LIKE '%${search}%' `;
+        let cityId = null;
+        if(city == 'Hà Nội'){
+            cityId = 1;
+        }
+        if(city == 'Đà Nẵng'){
+            cityId = 3;
+        }
+        if(city == 'TP HCM'){
+            cityId = 2;
+        }
+        const queryCity = `SELECT j.job_id FROM job j INNER JOIN company c ON c.company_id = j.company_id  WHERE c.province_id = '${cityId}' AND LOWER(c.company_name) LIKE '%${search}%'`;
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    getJobIdByPositionName(search, city, page, limit, func){
+        const offset = (page - 1) * limit;
+        const queryAll = `SELECT j.job_id FROM job j INNER JOIN job_position jp ON jp.position_id = j.position_id WHERE LOWER(jp.position_name) LIKE '%${search}%' `;
+        let cityId = null;
+        if(city == 'Hà Nội'){
+            cityId = 1;
+        }
+        if(city == 'Đà Nẵng'){
+            cityId = 3;
+        }
+        if(city == 'TP HCM'){
+            cityId = 2;
+        }
+        const queryCity = `SELECT j.job_id FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN job_position jp ON jp.position_id = j.position_id WHERE c.province_id = '${cityId}' AND LOWER(jp.position_name) LIKE '%${search}%' `;
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    getJobIdByTechName(search, city, page, limit, func){
+        const offset = (page - 1) * limit;
+        const queryAll = `SELECT j.job_id FROM job j INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE LOWER(t.technology_name) LIKE '%${search}%' `;
+        let cityId = null;
+        if(city == 'Hà Nội'){
+            cityId = 1;
+        }
+        if(city == 'Đà Nẵng'){
+            cityId = 3;
+        }
+        if(city == 'TP HCM'){
+            cityId = 2;
+        }
+        const queryCity = `SELECT j.job_id FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN techjob tj ON tj.job_id = j.job_id INNER JOIN technology t ON t.technology_id = tj.technology_id WHERE c.province_id = '${cityId}' AND LOWER(t.technology_name) LIKE '%${search}%'`;
+        if(city == 'all'){
+             connection.query(queryAll, func);
+        }else{
+            connection.query(queryCity, func);
+        }
+    }
+    getJobDataFromIdArr(idArr, func){
+        const idArrString = `(${idArr.toString()})`;
+        const query = `SELECT j.job_id, j.company_id, j.number_of_job, j.job_title, j.min_salary, j.max_salary, j.job_description, j.update_time, c.company_avatar, p.province_id, p.province_name FROM job j INNER JOIN company c ON c.company_id = j.company_id INNER JOIN province p ON p.province_id = c.province_id INNER JOIN job_position jp ON j.position_id = jp.position_id WHERE job_id IN ${idArrString}`;
+        connection.query(query, func);
+    }
+    
 }
 
 module.exports = new Job();

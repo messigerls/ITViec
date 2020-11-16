@@ -48,17 +48,7 @@ function insertRandomJobData() {
     let index = 0;
 
     
-    // const job = {
-    //     addPosition: positionId,
-    //     addTitle: jobTitle,
-    //     addNumberJob: numberOfJob,
-    //     addMinSalary: minSalary,
-    //     addMaxSalary: maxSalary,
-    //     addDescription: jobDescription,
-    //     addRequire: jobRequire,
-    //     addOverTime: overtime,
-    //     addTimeServing: timeServing,
-    // };
+    
 
     // Job.insertJob(job, companyId, (err, result) => {
     //     if (err) console.log(err);
@@ -81,7 +71,7 @@ function insertRandomJobData() {
     //     }
     // });
     let result = `INSERT INTO job (company_id, position_id, job_title, number_of_job, min_salary, max_salary, job_description, job_require, overtime, timeserving, update_time) VALUES `;
-    while(index < 1000){
+    while(index < 10){
         let techArr = [];
         let companyId =
             companyIdArr[Math.floor(companyIdArr.length * Math.random())];
@@ -97,15 +87,30 @@ function insertRandomJobData() {
         let jobRequire = randomString(10, 15);
         let overtime = overtimeArr[Math.floor(Math.random())];
         let timeServing = "T2-T6";
-        result += `(${companyId}, ${positionId}, "${jobTitle}", ${numberOfJob}, ${minSalary}, ${maxSalary}, "${jobDescription}", "${jobRequire}", ${overtime}, "${timeServing}", "${getDateTimeNow()}"), ` 
+        let job = {
+            addPosition: positionId,
+            addTitle: jobTitle,
+            addNumberJob: numberOfJob,
+            addMinSalary: minSalary,
+            addMaxSalary: maxSalary,
+            addDescription: jobDescription,
+            addRequire: jobRequire,
+            addOverTime: overtime,
+            addTimeServing: timeServing,
+        };
+        Job.insertJob(job, companyId, (err, result) => {
+            
+            
+        })
+        //result += `(${companyId}, ${positionId}, "${jobTitle}", ${numberOfJob}, ${minSalary}, ${maxSalary}, "${jobDescription}", "${jobRequire}", ${overtime}, "${timeServing}", "${getDateTimeNow()}"), ` 
         index ++;
         
     }
-    fs.writeFile("E:\Monhocnam3\HQTCSDL\BTL\ITViec\data.txt", result, (err) => {
-        console.log(err)
-    })
+    // fs.writeFile("E:\Monhocnam3\HQTCSDL\BTL\ITViec\data.txt", result, (err) => {
+    //     console.log(err)
+    // })
     
 }
-insertRandomJobData();
 
-module.exports = { removeQuotation, getDateTimeNow };
+
+module.exports = { removeQuotation, getDateTimeNow , randomString};

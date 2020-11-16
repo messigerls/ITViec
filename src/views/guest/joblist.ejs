@@ -81,7 +81,7 @@
                                 <div class="form__group">
                                     <i class="fas fa-search icon__search"></i>
                                     <input type="text" name="search" id="search"
-                                        placeholder="Tìm kiếm theo kỹ năng, chức vụ, công ty" class="form__input" value = "<%= search ?  search : null %>" />
+                                        placeholder="Tìm kiếm theo việc làm, kỹ năng, chức vụ, công ty" class="form__input" value = "<%= search ?  search : null %>" />
                                 </div>
                             
                                     <select id="city" class="form-control city" name="city">
@@ -110,44 +110,28 @@
             <div class="main">
                 <div class="main__center width_box">
                     <div class="main__title">
-                        <h2>Tìm thấy <%= jobData.length %> việc làm cho bạn</h2>
+                        <h2>Tìm thấy <span id="countJob"></span> việc làm cho bạn</h2>
                     </div>
                     
                     <div class="main__job">
-                        <% jobData.reverse().forEach(job => { %> 
-                            <div class="main__job__item">
-                                <div class="job__item__left">
-                                    <a href="/company/<%= job.company_id %>">
-                                        <img src=<%= job.company_avatar %>  alt="avatar company" class="main__item__left__img">
-                                    </a>
-                                </div>
-                                <div class="job__item__center">
-                                    <a href="/job/<%= job.job_id %>">
-                                        <h3 class="job__item__title"><%= job.number_of_job %> <%= job.job_title %></h3>
-                                    </a>
-                                    <p class="job__item__salary"><i class="fas fa-dollar-sign"></i> <%= (job.min_salary || '?') + ' - ' + (job.max_salary || '?')%> </p>
-                                    
-                                    <div class="main__job__description">
-                                        <p class="job__description"><%= job.job_description %></p>
-                                    </div>
-                                    <div class="job__tech__list">
-                                        <% techData.filter(techJob => techJob.job_id === job.job_id)[0].technology_arr.map(tech => { %> 
-                                            <a href="/job-list/all/<%= tech.technology_name %>" class="job__tech__item"><%= tech.technology_name %></a>
-                                        <% }) %> 
-                                    </div>
-                                </div>
-                                <div class="job__item__right">
-                                    <div class="job__item__right__top">
-                                        <span><%= job.province_name %></span>
-                                    </div>
-                                    <div class="job__item__right__bot">
-                                        <span><%= job.distanceTime %> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        <% }) %> 
+                        
                     </div>
-
+                    <nav aria-label="..." class="navpage">
+                        <ul class="pagination">
+                            <li class="page-item disabled" id="previous">
+                                <a class="page-link" tabindex="-1"  onclick="previousPage()"><i class="fas fa-backward" ></i> Previous</a>
+                            </li>
+                            <li class="page-item"><p class="page-link"><span id="pageActive"></span>/<span id="totalPage"></span></p></li>
+                            <!-- <li class="page-item active">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+                            
+                            <li class="page-item" id="next">
+                                <a class="page-link"  onclick="nextPage()">Next <i class="fas fa-forward"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </main>
