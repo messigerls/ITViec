@@ -129,24 +129,12 @@ class ApiController{
       if(city === 'da-nang') searchCity = 'Đà Nẵng';
       if(city === 'tp-hcm') searchCity = 'TP HCM';
       Promise.all([
-         // new Promise((resolve, reject) => {
-         //    Job.getJobBySearchLimit(search.toLowerCase(), searchCity, _page, _limit, (err, data) => {
-         //       if(err) reject(err)
-         //       resolve(data);
-         //    })
-         // }),
          new Promise((resolve, reject) => {
             TechJob.getTechJob((err, data) => {
                if(err) reject(err);
                resolve(data);
             })
          }),
-         // new Promise((resolve, reject) => {
-         //    Job.countJobSearch(search.toLowerCase(), searchCity, (err, data) => {
-         //       if(err) reject(err)
-         //       resolve(data[0].countJob);
-         //    })
-         // }),
          new Promise((resolve, reject) => {
             Job.getJobIdByCompanyName(search.toLowerCase(), searchCity, _page, _limit, (err, data) => {
                if(err) reject(err);
@@ -177,7 +165,7 @@ class ApiController{
          }),
       ]).then(result => {
          const [techJobData, jobIdCompany, jobIdJobTitle, jobIdPosition, jobIdTech] = result;
-         const jobIdData = Array.from(new Set(jobIdCompany.concat(jobIdJobTitle).concat(jobIdPosition).concat(jobIdTech)));
+         const jobIdData = Array.from(new Set(jobIdJobTitle.concat(jobIdCompany).concat(jobIdPosition).concat(jobIdTech)));
          //console.log(jobIdData)
          const countJob = jobIdData.length;
          //res.json(jobIdData)
