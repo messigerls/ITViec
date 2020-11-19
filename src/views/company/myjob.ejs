@@ -163,7 +163,7 @@
                                         <p class="job__description"><%= job.job_description %></p>
                                         <div class="job__tech__list">
                                             <% techJobData.filter(techJob => techJob.job_id === job.job_id)[0].technology_arr.forEach(tech => { %> 
-                                                <a href="#" class="job__tech__item"><%= tech.technology_name %></a>
+                                                <a href="/job-list/all/<%= tech.technology_name %>" class="job__tech__item"><%= tech.technology_name %></a>
                                             <% }) %> 
                                         </div>
                                     </div>

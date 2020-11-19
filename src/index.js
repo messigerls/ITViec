@@ -42,7 +42,7 @@ route(app);
 // const now = new Date();
 // const timeServing = `${now.getFullYear()}-${now.getMonth() < 10 ? '0' + now.getMonth() : now.getMonth()}-${now.getDate() < 10 ? '0' + now.getDate() : now.getDate()} ${now.toTimeString().substring(0, 8)}`;
 // console.log(timeServing)
-const arr1 = [1, 2, 3];
-const arr2 = [3, 4, 5, 6, 1];
-const arr3 = [5, 7, 8];
-console.log(Array.from(new Set(arr1.concat(arr2).concat(arr3))))
+// const arr1 = [1, 2, 3];
+// const arr2 = [3, 4, 5, 6, 1];
+// const arr3 = [5, 7, 8];
+// console.log(Array.from(new Set(arr1.concat(arr2).concat(arr3))))
